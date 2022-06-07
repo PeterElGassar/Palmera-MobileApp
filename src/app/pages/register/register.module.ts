@@ -1,22 +1,21 @@
-import { ErrorMessageComponent } from './../../components/error-message/error-message.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { LoginPageRoutingModule } from './login-routing.module';
+import { RegisterPageRoutingModule } from './register-routing.module';
 
-import { LoginPage } from './login.page';
+import { RegisterPage } from './register.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    LoginPageRoutingModule,
+    RegisterPageRoutingModule,
     ReactiveFormsModule,
   ],
-  declarations: [LoginPage, ErrorMessageComponent],
+  declarations: [RegisterPage],
 })
-export class LoginPageModule {}
+export class RegisterPageModule {}

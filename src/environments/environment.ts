@@ -3,7 +3,15 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  firebaseConfig: {
+    apiKey: 'AIzaSyBOOZUNKTAPJWOI6JOZjwEzknmaktDoiiE',
+    authDomain: 'palmera-5bccc.firebaseapp.com',
+    projectId: 'palmera-5bccc',
+    storageBucket: 'palmera-5bccc.appspot.com',
+    messagingSenderId: '105721021504',
+    appId: '1:105721021504:web:31182c6a6a64dc2f2fcba5',
+  },
+  production: false,
 };
 
 /*

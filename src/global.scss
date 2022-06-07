@@ -26,9 +26,9 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 
-.flex-wrapper{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-}
+@import "../src/assets/styles/bootstrap.min.css";
+// @import "../src/assets/styles/boxicons.min.css";
+@import "../src/assets/styles/style.css";
+@import "../src/assets/styles/responsive.css";
+
+
