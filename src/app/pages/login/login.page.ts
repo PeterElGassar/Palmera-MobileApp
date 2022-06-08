@@ -52,6 +52,7 @@ export class LoginPage implements OnInit {
           //
           this.authService.getDetails({ uid: res.user.uid }).subscribe(
             (res) => {
+              debugger;
               console.log(res);
               alert('Welcome ' + res['name']);
             },

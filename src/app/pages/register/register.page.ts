@@ -1,7 +1,10 @@
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
+import { create } from 'domain';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-register',
@@ -10,11 +13,14 @@ import { AuthService } from 'src/app/services/auth.service';
   providers: [],
 })
 export class RegisterPage implements OnInit {
+  [x: string]: any;
   registerForm: FormGroup;
   constructor(
     private router: Router,
     private fm: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private loader: LoadingController,
+    private af: AngularFireAuth
   ) {}
 
   ngOnInit() {
@@ -40,21 +46,37 @@ export class RegisterPage implements OnInit {
     return this.registerForm.controls;
   }
 
-  submitForm() {
+  async submitForm() {
+    let loaderVar = await this.loader.create({ message: 'loading ...' });
+    loaderVar.present();
+
     this.authService.signup(this.registerForm.value).then(
       (res) => {
         if (res.user.uid) {
-          let data = {
-            email: this.registerForm.get('email').value,
-            password: this.registerForm.get('password').value,
-            name: this.registerForm.get('name').value,
-            uid: res.user.uid,
-          };
-          this.authService.saveDetails(data).then(
+          //email verify
+          // res.user.sendEmailVerification().then(
+          //   (res: any) => {
+          //     debugger;
+          //     console.log(res);
+          //   },
+          //   (err: any) => {
+          //     debugger;
+          //     alert(err.message);
+          //     console.log(err);
+          //   }
+          // );
+          //email verify
+
+          debugger;
+          this.registerFormControl.id.setValue(res.user.uid);
+
+          this.authService.saveDetails(this.registerForm.value).then(
             (res) => {
-              alert('Account Created!');
+              debugger;
+              this.router.navigateByUrl('/home', { replaceUrl: true });
             },
             (err) => {
+              debugger;
               console.log(err);
             }
           );
@@ -62,9 +84,33 @@ export class RegisterPage implements OnInit {
       },
       (err) => {
         alert(err.message);
-
         console.log(err);
       }
     );
+    loaderVar.dismiss();
+  }
+
+  async submitForm2() {
+    debugger;
+
+    let loader = await this.loader.create({ message: 'loading ...' });
+    loader.present();
+
+    const user = await this.authService.signup2(this.registerForm.value);
+
+    loader.dismiss();
+    if (user) {
+      this.router.navigateByUrl('/home', { replaceUrl: true });
+    }
+  }
+  loaderVar: any;
+  async ShowLoader() {
+    this.loaderVar = await this.loader.create({ message: 'loading ...' });
+
+    this.loaderVar.present();
+
+    setTimeout(() => {
+      this.loaderVar.dismiss();
+    }, 3000);
   }
 }

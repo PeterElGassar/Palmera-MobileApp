@@ -5,7 +5,12 @@
       <ion-back-button color="danger"></ion-back-button>
     </ion-buttons>
     <ion-title>home</ion-title>
+    
   </ion-toolbar>
+</ion-header>
+
+<ion-header *ngIf="!hasVerifiedEmail">
+please check you'r email
 </ion-header>
 
 <ion-content>

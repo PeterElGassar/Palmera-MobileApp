@@ -1,18 +1,26 @@
-
 <ion-content>
-	<section class="user-area ptb-100">
+  <section class="user-area ptb-100">
     <div class="container">
       <div class="row">
         <div class="col-lg-6">
           <div class="user-form-content">
             <h3>Create an Account</h3>
 
-            <form [formGroup]="registerForm" *ngIf="registerForm" (ngSubmit)="submitForm()" class="user-form">
+            <form [formGroup]="registerForm" *ngIf="registerForm" class="user-form">
               <div class="row">
                 <div class="col-12">
                   <div class="form-group">
                     <label>Name</label>
                     <input class="form-control" type="text" formControlName="name">
+
+                    <div *ngIf="registerFormControl.name?.touched &&registerFormControl.name?.invalid "
+                    class="validation-wrapper">
+
+
+                    <span *ngIf="registerForm.get('name').errors['required']" class="ml-2 text-danger"> Name
+                      is required</span>
+
+                  </div>
                   </div>
                 </div>
 
@@ -20,6 +28,22 @@
                   <div class="form-group">
                     <label>Email</label>
                     <input class="form-control" type="email" formControlName="email">
+
+                    <div *ngIf="registerFormControl.email?.touched && registerFormControl.email?.invalid"
+                      class="validation-wrapper">
+
+
+
+                      <span *ngIf="registerForm.get('email').errors['required']" class="ml-2 text-danger">
+                        Email is required
+
+                      </span>
+
+                      <span *ngIf="registerForm.get('email').errors['pattern']
+                  " class="ml-2 text-danger">Email format does't valid</span>
+
+                    </div>
+                    <!-- Email Validation -->
                   </div>
                 </div>
 
@@ -27,24 +51,39 @@
                   <div class="form-group">
                     <label>Password</label>
                     <input class="form-control" type="password" formControlName="password">
+
+                    <div *ngIf="registerFormControl.password?.touched &&registerFormControl.password?.invalid "
+                      class="validation-wrapper">
+
+
+                      <span *ngIf="registerForm.get('password').errors['required']" class="ml-2 text-danger"> Password
+                        is required</span>
+
+                    </div>
                   </div>
                 </div>
-  
+
                 <!-- <div class="col-12">
                   <div class="form-group">
                     <label>Repeat Password</label>
                     <input class="form-control" type="password" name="repeat-password">
                   </div>
                 </div> -->
-  
+
                 <div class="col-12">
-                  <button [disabled]="registerForm.invalid" class="default-btn register" type="submit">
+                  <button [disabled]="registerForm.invalid" (click)="submitForm()" class="default-btn register"
+                    type="submit">
                     Register Now
                   </button>
                 </div>
 
                 <div class="col-12">
                   <p class="create">Already Have an Account? <a routerLink="/login">Log In</a></p>
+                </div>
+                <div class="col-8 mx-auto">
+
+                  <button class="btn btn-danger" (click)="ShowLoader()">Show Loader</button>
+
                 </div>
               </div>
             </form>
