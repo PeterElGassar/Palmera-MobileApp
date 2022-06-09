@@ -15,6 +15,7 @@ import { LoadingController } from '@ionic/angular';
 export class RegisterPage implements OnInit {
   [x: string]: any;
   registerForm: FormGroup;
+  loaderVar: any;
   constructor(
     private router: Router,
     private fm: FormBuilder,
@@ -47,24 +48,17 @@ export class RegisterPage implements OnInit {
   }
 
   async submitForm() {
-    let loaderVar = await this.loader.create({ message: 'loading ...' });
-    loaderVar.present();
+    this.loaderVar = await this.loader.create({ message: 'loading ...' });
+    this.loaderVar.present();
 
     this.authService.signup(this.registerForm.value).then(
       (res) => {
+        console.log(res.user);
+
         if (res.user.uid) {
+          res.user.sendEmailVerification();
           //email verify
-          // res.user.sendEmailVerification().then(
-          //   (res: any) => {
-          //     debugger;
-          //     console.log(res);
-          //   },
-          //   (err: any) => {
-          //     debugger;
-          //     alert(err.message);
-          //     console.log(err);
-          //   }
-          // );
+          this.authService.sendEmailVerification(res.user);
           //email verify
 
           debugger;
@@ -87,23 +81,23 @@ export class RegisterPage implements OnInit {
         console.log(err);
       }
     );
-    loaderVar.dismiss();
+    this.loaderVar.dismiss();
   }
 
   async submitForm2() {
     debugger;
 
-    let loader = await this.loader.create({ message: 'loading ...' });
-    loader.present();
+    this.loaderVar = await this.loader.create({ message: 'loading ...' });
+    this.loaderVar.present();
 
     const user = await this.authService.signup2(this.registerForm.value);
 
-    loader.dismiss();
+    this.loaderVar.dismiss();
     if (user) {
       this.router.navigateByUrl('/home', { replaceUrl: true });
     }
   }
-  loaderVar: any;
+
   async ShowLoader() {
     this.loaderVar = await this.loader.create({ message: 'loading ...' });
 

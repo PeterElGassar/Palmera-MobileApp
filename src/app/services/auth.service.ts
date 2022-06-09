@@ -1,27 +1,28 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { Router } from '@angular/router';
 import { BehaviorSubject, observable, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '../shared/models/user';
 import * as firebase from 'firebase/compat/app';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-
+import { AlertController } from '@ionic/angular';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  baseUrl = '';
   private currentUserSource = new BehaviorSubject<User>(null);
   currentUser$ = this.currentUserSource.asObservable();
+  // this.auth.signInWithPopup( new firebase.default.auth.GoogleAuthProvider());
+  user: Observable<firebase.default.User>;
 
   constructor(
     private auth: AngularFireAuth,
-    private router: Router,
-    public fireStore: AngularFirestore,
-    public fireAuth: AngularFireAuth
-  ) {}
+    public alertController: AlertController,
+    public fireStore: AngularFirestore
+  ) {
+    this.user = auth.user;
+  }
 
   loginWhithEmail(val: any) {
     debugger;
@@ -34,9 +35,10 @@ export class AuthService {
         val.email,
         val.password
       );
-
+      debugger;
       return user;
     } catch (e) {
+      debugger;
       return null;
     }
   }
@@ -61,7 +63,8 @@ export class AuthService {
   }
 
   saveDetails(val: any) {
-    return this.fireStore.collection('users').doc(val.uid).set(val);
+    debugger;
+    return this.fireStore.collection('users').doc(val.id).set(val);
   }
 
   getDetails(val: any) {
@@ -84,6 +87,7 @@ export class AuthService {
       }
     );
   }
+
   // login(_email: string, _password: string): Observable<User> {
   //   debugger;
   //   return new Observable<any>((observable) => {
@@ -127,5 +131,17 @@ export class AuthService {
           }
         })
       );
+  }
+
+  async presentAlertMultipleButtons() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Alert',
+      subHeader: 'Subtitle',
+      message: 'email or password Invalid ..',
+      buttons: ['Ok'],
+    });
+
+    await alert.present();
   }
 }

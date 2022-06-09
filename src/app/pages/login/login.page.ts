@@ -1,3 +1,4 @@
+import { LoadingController } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -11,11 +12,12 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginPage implements OnInit {
   loginForm: FormGroup;
-
+  loaderVar: any;
   constructor(
     private router: Router,
     private fm: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private loader: LoadingController
   ) {}
 
   ngOnInit() {
@@ -40,31 +42,23 @@ export class LoginPage implements OnInit {
     return this.loginForm.controls;
   }
 
-  submitForm() {
-    // console.log(this.loginForm.get('email').value);
-    // console.log(this.loginForm.get('password').value);
+  async submitForm() {
+    this.loaderVar = await this.loader.create({ message: 'loading ...' });
+    this.loaderVar.present();
 
     this.authService
-      .loginWhithEmail(this.loginForm.value)
+      .loginWhithEmail2(this.loginForm.value)
       .then((res) => {
+        debugger;
         console.log(res);
-        if (res.user.uid) {
-          //
-          this.authService.getDetails({ uid: res.user.uid }).subscribe(
-            (res) => {
-              debugger;
-              console.log(res);
-              alert('Welcome ' + res['name']);
-            },
-            (err) => {
-              console.log(err);
-            }
-          );
-          //
-        }
+        if (res) {
+          this.router.navigateByUrl('/home');
+        } else this.authService.presentAlertMultipleButtons();
+        this.loader.dismiss();
       })
       .catch((err) => {
         console.log(err);
       });
+    this.loader.dismiss();
   }
 }

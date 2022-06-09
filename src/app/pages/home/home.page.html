@@ -9,10 +9,32 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-header *ngIf="!hasVerifiedEmail">
+<!-- <ion-header *ngIf="!hasVerifiedEmail">
 please check you'r email
-</ion-header>
+</ion-header> -->
 
 <ion-content>
+  <div class="row">
+
+  
+  <ion-chip class="col-10 mx-auto d-flex justify-content-center py-4 my-5"  color="secondary" *ngIf="!hasVerifiedEmail">
+    <ion-label class="ion-text-center text-center"> check email to verify your account</ion-label>
+    <ion-icon name="alert-circle-outline"></ion-icon>
+  </ion-chip>
+</div>
+
+
+
+<ion-card>
+  <ion-card-header>
+    <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+    <ion-card-title>Card Title</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    Keep close to Nature's heart... and break clear away, once in awhile,
+    and climb a mountain or spend a week in the woods. Wash your spirit clean.
+  </ion-card-content>
+</ion-card>
 
 </ion-content>
