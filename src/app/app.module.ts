@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { SharedMainModule } from './components/shared-main.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,7 +20,7 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
-
+    SharedMainModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFireStorageModule,

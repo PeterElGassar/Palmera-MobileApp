@@ -7,6 +7,8 @@ import { User } from '../shared/models/user';
 import * as firebase from 'firebase/compat/app';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AlertController } from '@ionic/angular';
+import { GoogleAuthProvider } from '@angular/fire/auth';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -64,7 +66,7 @@ export class AuthService {
 
   saveDetails(val: any) {
     debugger;
-    return this.fireStore.collection('users').doc(val.id).set(val);
+    return this.fireStore.collection('users').doc(val.uid).set(val);
   }
 
   getDetails(val: any) {
@@ -88,32 +90,29 @@ export class AuthService {
     );
   }
 
-  // login(_email: string, _password: string): Observable<User> {
-  //   debugger;
-  //   return new Observable<any>((observable) => {
-  //     debugger;
-  //     this.auth
-  //       .setPersistence(firebase.default.auth.Auth.Persistence.LOCAL)
-  //       .then(() => {
-  //         this.auth
-  //           .signInWithEmailAndPassword(_email, _password)
-  //           .then((fireBaseUser: firebase.default.auth.UserCredential) => {
-  //             debugger;
-  //             observable.next({ email: _email, password: _password });
-  //             console.log('success');
-  //             observable.complete();
-  //           });
-  //       })
-  //       .catch((err) => {
-  //         debugger;
-  //         observable.error(err);
-  //         observable.complete();
-  //       });
-  //   });
-  // }
-
-  // localStorage.setItem("token",user.token);
-  // this.currentUserSource.next(user);
+  login(val: any): Observable<User> {
+    debugger;
+    return new Observable<any>((observable) => {
+      debugger;
+      this.auth
+        .setPersistence(firebase.default.auth.Auth.Persistence.LOCAL)
+        .then(() => {
+          this.auth
+            .signInWithEmailAndPassword(val.email, val.password)
+            .then((fireBaseUser: firebase.default.auth.UserCredential) => {
+              debugger;
+              observable.next({ email: val.email, password: val.password });
+              console.log('success');
+              observable.complete();
+            });
+        })
+        .catch((err) => {
+          debugger;
+          observable.error(err);
+          observable.complete();
+        });
+    });
+  }
 
   getDetails2(val: any) {
     debugger;
@@ -133,15 +132,19 @@ export class AuthService {
       );
   }
 
-  async presentAlertMultipleButtons() {
+  async presentAlertMultipleButtons(message: string) {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'Alert',
       subHeader: 'Subtitle',
-      message: 'email or password Invalid ..',
+      message: message,
       buttons: ['Ok'],
     });
 
     await alert.present();
+  }
+
+  loginWithGoogle() {
+    return this.auth.signInWithPopup(new GoogleAuthProvider());
   }
 }

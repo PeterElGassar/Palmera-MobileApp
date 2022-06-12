@@ -47,18 +47,33 @@ export class LoginPage implements OnInit {
     this.loaderVar.present();
 
     this.authService
-      .loginWhithEmail2(this.loginForm.value)
+      .loginWhithEmail(this.loginForm.value)
       .then((res) => {
         debugger;
         console.log(res);
         if (res) {
           this.router.navigateByUrl('/home');
-        } else this.authService.presentAlertMultipleButtons();
+        } else
+          this.authService.presentAlertMultipleButtons(
+            'email or password Invalid ..'
+          );
         this.loader.dismiss();
       })
       .catch((err) => {
         console.log(err);
       });
     this.loader.dismiss();
+  }
+
+  loginWithGoogle() {
+    this.authService.loginWithGoogle().then(
+      () => {
+        console.log('Signin');
+        this.router.navigateByUrl('/home');
+      },
+      (err) => {
+        console.log(err.message);
+      }
+    );
   }
 }
