@@ -5,6 +5,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { create } from 'domain';
 import { LoadingController } from '@ionic/angular';
+import { Role } from 'src/app/shared/models/role';
 
 @Component({
   selector: 'app-register',
@@ -13,9 +14,10 @@ import { LoadingController } from '@ionic/angular';
   providers: [],
 })
 export class RegisterPage implements OnInit {
-  [x: string]: any;
   registerForm: FormGroup;
   loaderVar: any;
+  roles: any[];
+
   constructor(
     private router: Router,
     private fm: FormBuilder,
@@ -25,11 +27,14 @@ export class RegisterPage implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.getRoles();
     this.createRegisterForm();
   }
 
   createRegisterForm() {
     this.registerForm = this.fm.group({
+      uid: [null],
+
       email: [
         null,
         [
@@ -39,7 +44,11 @@ export class RegisterPage implements OnInit {
       ],
       password: [null, [Validators.required]],
       name: [null, [Validators.required, Validators.maxLength(100)]],
-      id: [null],
+      phone: [null, [Validators.required, Validators.maxLength(15)]],
+      organizationCode: [null, [Validators.required, Validators.maxLength(15)]],
+      employeeNumber: [null, [Validators.required, Validators.maxLength(10)]],
+      roleId: [null, [Validators.required]],
+      isDataComplete: [true],
     });
   }
 
@@ -62,7 +71,7 @@ export class RegisterPage implements OnInit {
           //email verify
 
           debugger;
-          this.registerFormControl.id.setValue(res.user.uid);
+          this.registerFormControl.uid.setValue(res.user.uid);
 
           this.authService.saveDetails(this.registerForm.value).then(
             (res) => {
@@ -106,5 +115,15 @@ export class RegisterPage implements OnInit {
     setTimeout(() => {
       this.loaderVar.dismiss();
     }, 3000);
+  }
+
+  async getRoles() {
+    this.authService.getRoles().subscribe((res: Role[]) => {
+      if (res) {
+        debugger;
+        this.roles = res;
+        console.log('roles' + res);
+      }
+    });
   }
 }

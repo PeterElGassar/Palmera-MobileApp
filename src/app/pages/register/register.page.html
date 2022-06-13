@@ -32,16 +32,11 @@
                     <div *ngIf="registerFormControl.email?.touched && registerFormControl.email?.invalid"
                       class="validation-wrapper">
 
-
-
                       <span *ngIf="registerForm.get('email').errors['required']" class="ml-2 text-danger">
-                        Email is required
-
-                      </span>
+                        Email is required</span>
 
                       <span *ngIf="registerForm.get('email').errors['pattern']
-                  " class="ml-2 text-danger">Email format does't valid</span>
-
+                      "class="ml-2 text-danger">Email format does't valid</span>
                     </div>
                     <!-- Email Validation -->
                   </div>
@@ -62,6 +57,92 @@
                     </div>
                   </div>
                 </div>
+
+
+                <div class="col-12">
+                  <div class="form-group">
+                    <label>Phone</label>
+                    <input max="15" class="form-control" type="tel" formControlName="phone">
+
+                    <div *ngIf="registerFormControl.phone?.touched && registerFormControl.phone?.invalid"
+                      class="validation-wrapper">
+
+                      <span *ngIf="registerForm.get('phone').errors['required']" class="ml-2 text-danger">
+                        Phone No. is required</span>
+                        
+                    </div>
+                    <!-- Email Validation -->
+                  </div>
+                </div>
+
+
+                <div class="col-12">
+                  <div class="form-group">
+                    <label>Organization Code</label>
+                    <input class="form-control" type="text" formControlName="organizationCode">
+
+                    <div *ngIf="registerFormControl.organizationCode?.touched && registerFormControl.organizationCode?.invalid"
+                      class="validation-wrapper">
+
+                      <span *ngIf="registerForm.get('organizationCode').errors['required']" class="ml-2 text-danger">
+                        organization Code is required</span>
+                        
+                    </div>
+                    <!-- Email Validation -->
+                  </div>
+                </div>
+
+
+                <div class="col-12">
+                  <div class="form-group">
+                    <label>Employee Number</label>
+                    <input class="form-control" type="number" formControlName="employeeNumber">
+
+                    <div *ngIf="registerFormControl.employeeNumber?.touched && registerFormControl.employeeNumber?.invalid"
+                      class="validation-wrapper">
+
+                      <span *ngIf="registerForm.get('employeeNumber').errors['required']" class="ml-2 text-danger">
+                        Employee No. is required</span>
+                        
+                    </div>
+                    <!-- Email Validation -->
+                  </div>
+                </div>
+
+
+
+
+
+
+                <div class="col-12">
+                  <div class="form-group">
+
+                    <ion-item>
+                      <ion-label>Account Type</ion-label>
+                      <ion-select formControlName="roleId" placeholder="Select One">
+                        <ion-select-option *ngFor="let role of roles" value="{{role.roleId}}">
+                          {{role.roleName}}
+                        </ion-select-option>
+                      </ion-select>
+                    </ion-item>
+
+
+
+                    <div *ngIf="registerFormControl.roleId?.touched && registerFormControl.roleId?.invalid"
+                      class="validation-wrapper">
+
+                      <span *ngIf="registerForm.get('roleId').errors['required']" class="ml-2 text-danger">
+                       Account Type is required</span>
+                        
+                    </div>
+                    <!-- Email Validation -->
+                  </div>
+                </div>
+
+
+
+
+
 
                 <!-- <div class="col-12">
                   <div class="form-group">

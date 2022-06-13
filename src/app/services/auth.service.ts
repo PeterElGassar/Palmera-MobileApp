@@ -8,6 +8,7 @@ import * as firebase from 'firebase/compat/app';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AlertController } from '@ionic/angular';
 import { GoogleAuthProvider } from '@angular/fire/auth';
+import { Role } from '../shared/models/role';
 
 @Injectable({
   providedIn: 'root',
@@ -64,9 +65,28 @@ export class AuthService {
     }
   }
 
-  saveDetails(val: any) {
+  async saveDetails(val: any) {
     debugger;
-    return this.fireStore.collection('users').doc(val.uid).set(val);
+
+    return await this.fireStore
+      .collection('users')
+      .doc(val.uid)
+      .set({
+        uid: val.uid !== undefined ? val.uid : '',
+        email: val.email !== undefined ? val.email : '',
+        name: val.name !== undefined ? val.name : '',
+        password: val.password !== undefined ? val.password : '',
+        phone: val.phone !== undefined ? val.phone : '',
+        organizationCode:
+          val.organizationCode !== undefined ? val.organizationCode : '',
+        employeeNumber:
+          val.employeeNumber !== undefined ? val.employeeNumber : 0,
+        roleId: val.roleId !== undefined ? val.roleId : '',
+      });
+  }
+
+  updateData(val: any) {
+    return this.fireStore.collection('users').doc(val.uid).update(val);
   }
 
   getDetails(val: any) {
@@ -146,5 +166,26 @@ export class AuthService {
 
   loginWithGoogle() {
     return this.auth.signInWithPopup(new GoogleAuthProvider());
+  }
+
+  getRoles(): Observable<any[]> {
+    return this.fireStore.collection('roles').valueChanges();
+  }
+
+  mappingUserEntity(val: any): User {
+    let user = new User(
+      val.uid !== undefined ? val.uid : '',
+      val.email !== undefined ? val.email : '',
+      val.displayName !== undefined ? val.displayName : '',
+      val.password !== undefined ? val.password : '',
+      val.phone !== undefined ? val.phone : '',
+
+      val.organizationCode !== undefined ? val.organizationCode : '',
+
+      val.employeeNumber !== undefined ? val.employeeNumber : 0,
+      val.roleId !== undefined ? val.roleId : ''
+    );
+
+    return user;
   }
 }
