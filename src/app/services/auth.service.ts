@@ -65,27 +65,24 @@ export class AuthService {
     }
   }
 
-  async saveDetails(val: any) {
+  async saveDetails(val: User) {
     debugger;
 
-    return await this.fireStore
-      .collection('users')
-      .doc(val.uid)
-      .set({
-        uid: val.uid !== undefined ? val.uid : '',
-        email: val.email !== undefined ? val.email : '',
-        name: val.name !== undefined ? val.name : '',
-        password: val.password !== undefined ? val.password : '',
-        phone: val.phone !== undefined ? val.phone : '',
-        organizationCode:
-          val.organizationCode !== undefined ? val.organizationCode : '',
-        employeeNumber:
-          val.employeeNumber !== undefined ? val.employeeNumber : 0,
-        roleId: val.roleId !== undefined ? val.roleId : '',
-      });
+    return await this.fireStore.collection('users').doc(val.uid).set({
+      uid: val.uid,
+      email: val.email,
+      name: val.name,
+      password: val.password,
+      phone: val.phone,
+      organizationCode: val.organizationCode,
+      employeeNumber: val.employeeNumber,
+      isDataComplete: val.isDataComplete,
+      roleId: val.roleId,
+    });
   }
 
   updateData(val: any) {
+    debugger;
     return this.fireStore.collection('users').doc(val.uid).update(val);
   }
 
@@ -174,18 +171,16 @@ export class AuthService {
 
   mappingUserEntity(val: any): User {
     let user = new User(
-      val.uid !== undefined ? val.uid : '',
-      val.email !== undefined ? val.email : '',
-      val.displayName !== undefined ? val.displayName : '',
-      val.password !== undefined ? val.password : '',
-      val.phone !== undefined ? val.phone : '',
-
-      val.organizationCode !== undefined ? val.organizationCode : '',
-
-      val.employeeNumber !== undefined ? val.employeeNumber : 0,
-      val.roleId !== undefined ? val.roleId : ''
+      val.uid,
+      val.email,
+      val.displayName,
+      val.password,
+      val.phone,
+      val.organizationCode,
+      val.employeeNumber,
+      val.isDataComplete,
+      val.roleId
     );
-
     return user;
   }
 }

@@ -20,10 +20,25 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot
   ): Observable<boolean> {
     return this.authServe.user.pipe(
-      map((auth) => {
+      map((user) => {
         debugger;
-        if (auth) return true;
-        console.log(auth);
+        if (user) {
+          //Check If User Complete his data Before Redirect To Home Page
+
+          this.authServe.getDetails(user).subscribe((userData: any) => {
+            if (userData.isDataComplete) {
+              this.router.navigate(['/home'], {
+                queryParams: { returnUrl: state.url },
+              });
+            } else
+              this.router.navigate(['/complete-data'], {
+                queryParams: { returnUrl: state.url },
+              });
+          });
+          return true;
+        }
+
+        //if not LogedIn User
         this.router.navigate(['/'], { queryParams: { returnUrl: state.url } });
       })
     );

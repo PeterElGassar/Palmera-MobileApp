@@ -10,16 +10,24 @@ export class User {
     phone,
     organizationCode,
     employeeNumber,
+    isDataComplete,
     roleId
   ) {
-    (this.uid = uid),
-      (this.email = email),
-      (this.name = name),
-      (this.password = password),
-      (this.phone = phone),
-      (this.organizationCode = organizationCode),
-      (this.employeeNumber = employeeNumber),
-      (this.roleId = roleId);
+    uid !== undefined ? (this.uid = uid) : (this.uid = ''),
+      email !== undefined ? (this.email = email) : (this.email = ''),
+      name !== undefined ? (this.name = name) : (this.name = ''),
+      password !== undefined ? (this.password = email) : (this.password = ''),
+      phone !== undefined ? (this.phone = email) : (this.phone = ''),
+      organizationCode !== undefined
+        ? (this.organizationCode = email)
+        : (this.organizationCode = ''),
+      employeeNumber !== undefined
+        ? (this.employeeNumber = employeeNumber)
+        : (this.employeeNumber = 0),
+      isDataComplete !== undefined
+        ? (this.isDataComplete = isDataComplete)
+        : (this.isDataComplete = false),
+      roleId !== undefined ? (this.roleId = roleId) : (this.roleId = '');
   }
 
   uid: string;

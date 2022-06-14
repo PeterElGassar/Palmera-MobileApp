@@ -68,7 +68,6 @@ export class LoginPage implements OnInit {
   loginWithGoogle() {
     this.authService.loginWithGoogle().then(
       (res) => {
-        debugger;
         console.log(res.user);
         let user = this.authService.mappingUserEntity(res.user);
         this.authService.saveDetails(user).then(() => {
