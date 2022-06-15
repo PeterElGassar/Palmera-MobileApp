@@ -1,3 +1,8 @@
+import {
+  AngularFireDatabase,
+  AngularFireList,
+  AngularFireObject,
+} from '@angular/fire/compat/database';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
@@ -7,8 +12,10 @@ import { User } from '../shared/models/user';
 import * as firebase from 'firebase/compat/app';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AlertController } from '@ionic/angular';
-import { GoogleAuthProvider } from '@angular/fire/auth';
-import { Role } from '../shared/models/role';
+import { GoogleAuthProvider, FacebookAuthProvider } from '@angular/fire/auth';
+import { resolve } from 'dns';
+import { rejects } from 'assert';
+import { promise } from 'protractor';
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +29,8 @@ export class AuthService {
   constructor(
     private auth: AngularFireAuth,
     public alertController: AlertController,
-    public fireStore: AngularFirestore
+    public fireStore: AngularFirestore,
+    private database: AngularFireDatabase // private database: Database
   ) {
     this.user = auth.user;
   }
@@ -32,37 +40,9 @@ export class AuthService {
     return this.auth.signInWithEmailAndPassword(val.email, val.password);
   }
 
-  async loginWhithEmail2(val: any) {
-    try {
-      const user = await this.auth.signInWithEmailAndPassword(
-        val.email,
-        val.password
-      );
-      debugger;
-      return user;
-    } catch (e) {
-      debugger;
-      return null;
-    }
-  }
-
   signup(val: any) {
     debugger;
     return this.auth.createUserWithEmailAndPassword(val.email, val.password);
-  }
-
-  async signup2(val: any) {
-    try {
-      const user = await this.auth.createUserWithEmailAndPassword(
-        val.email,
-        val.password
-      );
-      user.user.sendEmailVerification();
-
-      return user;
-    } catch (e) {
-      return null;
-    }
   }
 
   async saveDetails(val: User) {
@@ -131,24 +111,6 @@ export class AuthService {
     });
   }
 
-  getDetails2(val: any) {
-    debugger;
-    return this.fireStore
-      .collection('users')
-      .doc(val.uid)
-      .valueChanges()
-      .pipe(
-        map((user: any) => {
-          if (user) {
-            console.log(user);
-
-            localStorage.setItem('loggedIn', user.token);
-            this.currentUserSource.next(user);
-          }
-        })
-      );
-  }
-
   async presentAlertMultipleButtons(message: string) {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
@@ -163,6 +125,10 @@ export class AuthService {
 
   loginWithGoogle() {
     return this.auth.signInWithPopup(new GoogleAuthProvider());
+  }
+
+  loginWithFacebook() {
+    return this.auth.signInWithPopup(new FacebookAuthProvider());
   }
 
   getRoles(): Observable<any[]> {
@@ -182,5 +148,50 @@ export class AuthService {
       val.roleId
     );
     return user;
+  }
+
+  // ==========================
+  // ============ RealTime Database
+  // ==========================
+
+  insertUser(val: any) {
+    return this.database.object(`users/${val.uid}`).set({
+      uid: val.uid,
+      email: val.email,
+      name: val.name,
+      password: val.password,
+      phone: val.phone,
+      organizationCode: val.organizationCode,
+      employeeNumber: val.employeeNumber,
+      isDataComplete: val.isDataComplete,
+      roleId: val.roleId,
+    });
+  }
+
+  updateUserData(val: any) {
+    debugger;
+    return this.database.object(`users/${val.uid}`).update(val);
+  }
+
+  async getAllUsers() {
+    return new Promise((resolve, reject) => {
+      this.database
+        .list('users')
+        .valueChanges()
+        .subscribe((value) => {
+          resolve(value);
+        });
+    });
+  }
+
+  getUserDetails(val: any) {
+    return new Promise((resolve, reject) => {
+      this.database
+        .object(`users/${val.uid}`)
+        .valueChanges()
+        .subscribe((userData) => {
+          resolve(userData);
+        });
+    });
   }
 }

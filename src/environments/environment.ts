@@ -11,6 +11,17 @@ export const environment = {
     messagingSenderId: '105721021504',
     appId: '1:105721021504:web:31182c6a6a64dc2f2fcba5',
   },
+
+  firebaseConfig2: {
+    apiKey: 'AIzaSyBOOZUNKTAPJWOI6JOZjwEzknmaktDoiiE',
+    authDomain: 'palmera-5bccc.firebaseapp.com',
+    databaseURL: 'https://palmera-5bccc-default-rtdb.firebaseio.com',
+    projectId: 'palmera-5bccc',
+    storageBucket: 'palmera-5bccc.appspot.com',
+    messagingSenderId: '105721021504',
+    appId: '1:105721021504:web:31182c6a6a64dc2f2fcba5',
+  },
+
   production: false,
 };
 

@@ -32,12 +32,12 @@ export class AppComponent implements OnInit {
   }
 
   getUserDetails(val: any) {
-    this.auth.getDetails(val).subscribe((userData) => {
-      debugger;
+    this.auth.getUserDetails(val).then((userData) => {
       if (userData) {
+        debugger;
+
         this.currentUserDetails = userData;
       }
-      // console.log('userData'+userData);
     });
   }
 }

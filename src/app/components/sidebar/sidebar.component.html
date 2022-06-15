@@ -1,4 +1,4 @@
-<ion-menu contentId="main-content" type="overlay">
+<ion-menu contentId="main-content" type="overlay" >
   <ion-content>
     <ion-list id="inbox-list">
       <ion-list-header>Plmera Systems</ion-list-header>
@@ -15,10 +15,10 @@
     <ion-list>
       <ion-item *ngIf="isUserLoggedIn">
         <ion-icon  slot="start" ios="bookmark-outline" md="bookmark-sharp"> </ion-icon>
+        <!-- <ion-label>Logout</ion-label> -->
         <ion-button (click)="logout()">Logout</ion-button>
       </ion-item>
     </ion-list>
-    
     <!-- <ion-list id="labels-list">
       <ion-list-header>Labels</ion-list-header>
 
@@ -27,6 +27,5 @@
         <ion-label>{{ label }}</ion-label>
       </ion-item>
     </ion-list> -->
-
   </ion-content>
 </ion-menu>

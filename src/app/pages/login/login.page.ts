@@ -70,9 +70,21 @@ export class LoginPage implements OnInit {
       (res) => {
         console.log(res.user);
         let user = this.authService.mappingUserEntity(res.user);
-        this.authService.saveDetails(user).then(() => {
-          debugger;
-        });
+        this.authService.insertUser(user);
+        this.router.navigateByUrl('/home');
+      },
+      (err) => {
+        console.log(err.message);
+      }
+    );
+  }
+
+  loginWithFacebook() {
+    this.authService.loginWithFacebook().then(
+      (res) => {
+        console.log(res.user);
+        let user = this.authService.mappingUserEntity(res.user);
+        this.authService.insertUser(user);
         this.router.navigateByUrl('/home');
       },
       (err) => {

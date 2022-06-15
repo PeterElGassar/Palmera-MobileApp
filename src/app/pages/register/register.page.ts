@@ -1,3 +1,4 @@
+import { User } from './../../shared/models/user';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -17,6 +18,7 @@ export class RegisterPage implements OnInit {
   registerForm: FormGroup;
   loaderVar: any;
   roles: any[];
+  _users: User[];
 
   constructor(
     private router: Router,
@@ -24,7 +26,15 @@ export class RegisterPage implements OnInit {
     private authService: AuthService,
     private loader: LoadingController,
     private af: AngularFireAuth
-  ) {}
+  ) {
+    var users: User[];
+    this.authService.getAllUsers().then((value) => {
+      debugger;
+      users = value as User[];
+    });
+    this._users = users;
+    console.log(this._users);
+  }
 
   ngOnInit() {
     this.getRoles();
@@ -69,42 +79,21 @@ export class RegisterPage implements OnInit {
           //email verify
           this.authService.sendEmailVerification(res.user);
           //email verify
-
           debugger;
           this.registerFormControl.uid.setValue(res.user.uid);
-
-          this.authService.saveDetails(this.registerForm.value).then(
-            (res) => {
-              debugger;
-              this.router.navigateByUrl('/home', { replaceUrl: true });
-            },
-            (err) => {
-              debugger;
-              console.log(err);
-            }
-          );
+          //save user data in firebase realtime database
+          this.authService.insertUser(this.registerForm.value).then(() => {
+            this.router.navigateByUrl('/home');
+          });
         }
       },
       (err) => {
-        alert(err.message);
+        this.authService.presentAlertMultipleButtons(err.message);
+        // alert(err.message);
         console.log(err);
       }
     );
     this.loaderVar.dismiss();
-  }
-
-  async submitForm2() {
-    debugger;
-
-    this.loaderVar = await this.loader.create({ message: 'loading ...' });
-    this.loaderVar.present();
-
-    const user = await this.authService.signup2(this.registerForm.value);
-
-    this.loaderVar.dismiss();
-    if (user) {
-      this.router.navigateByUrl('/home', { replaceUrl: true });
-    }
   }
 
   async ShowLoader() {
@@ -114,7 +103,7 @@ export class RegisterPage implements OnInit {
 
     setTimeout(() => {
       this.loaderVar.dismiss();
-    }, 3000);
+    }, 2000);
   }
 
   async getRoles() {

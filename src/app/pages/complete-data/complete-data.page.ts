@@ -56,7 +56,7 @@ export class CompleteDataPage implements OnInit {
     this.loaderVar = await this.loader.create({ message: 'loading ...' });
     this.loaderVar.present();
 
-    this.authService.updateData(this.completeDataForm.value).then(
+    this.authService.updateUserData(this.completeDataForm.value).then(
       () => {
         debugger;
         this.router.navigateByUrl('/home', { replaceUrl: true });
@@ -67,6 +67,7 @@ export class CompleteDataPage implements OnInit {
         console.log(err);
       }
     );
+
     this.loaderVar.dismiss();
   }
 
