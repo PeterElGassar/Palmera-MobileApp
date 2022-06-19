@@ -88,7 +88,7 @@ export class RegisterPage implements OnInit {
         }
       },
       (err) => {
-        this.authService.presentAlertMultipleButtons(err.message);
+        this.authService.alertPopupMessage(err.message);
         // alert(err.message);
         console.log(err);
       }

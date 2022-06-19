@@ -1,0 +1,52 @@
+
+<ion-item>
+  
+    <ion-label position="floating">{{label}}</ion-label>
+  
+    <!-- <input
+  
+    formControlName="email"
+     type="email"
+     class="form-control"
+  
+  
+     > -->
+  
+  <!--[ngClass]="{'danger-border': getFormFiled?.invalid &&  getFormFiled?.dirty}" -->
+     <ion-input  class="mb-1"
+      [type]="type"
+     (input)="onChange($event)"
+     (blur)="onTouched()"
+     id="{{label}}"
+     #inputRef
+     name="{{label}}"
+  [id]="fildName"
+  [name]="fildName"
+  
+     ></ion-input>
+<!-- 
+     <ion-label *ngIf="getFormFiled?.touched && getFormFiled?.errors.required
+     " color="danger">{{label}} is required
+    </ion-label> -->
+
+    <ion-label *ngIf="getFormFiled?.touched && getFormFiled?.invalid "
+    class="validation-wrapper">
+
+
+    <span *ngIf="getFormFiled?.errors.required" class="ml-2 text-danger"> Password is required</span>
+
+  </ion-label> 
+</ion-item>
+<ion-label>
+  dirty: {{getFormFiled?.dirty}}
+  <br>
+  pristine: {{getFormFiled?.pristine}}
+  <br>
+  touched: {{getFormFiled?.touched}}
+  <br>
+  <!-- required: {{ getFormFiled?.errors.required}} -->
+  <!-- <br>
+  pattern: {{ getFormFiled?.errors.pattern}} -->
+</ion-label>
+
+

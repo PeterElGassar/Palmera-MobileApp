@@ -111,11 +111,11 @@ export class AuthService {
     });
   }
 
-  async presentAlertMultipleButtons(message: string) {
+  async alertPopupMessage(message: string) {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
-      header: 'Alert',
-      subHeader: 'Subtitle',
+      header: 'Palmera Systems',
+      subHeader: '',
       message: message,
       buttons: ['Ok'],
     });

@@ -1,5 +1,10 @@
 import { LoadingController } from '@ionic/angular';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginPageForm } from './login-page-form';
@@ -38,8 +43,12 @@ export class LoginPage implements OnInit {
     });
   }
 
-  get loginFormControl() {
-    return this.loginForm.controls;
+  get loginFormControl(): FormGroup {
+    return this.loginForm;
+  }
+
+  get emailField(): FormControl {
+    return this.loginForm.get('email') as FormControl;
   }
 
   async submitForm() {
@@ -54,13 +63,13 @@ export class LoginPage implements OnInit {
         if (res) {
           this.router.navigateByUrl('/home');
         } else
-          this.authService.presentAlertMultipleButtons(
-            'email or password Invalid ..'
-          );
+          this.authService.alertPopupMessage('email or password Invalid ..');
         this.loader.dismiss();
       })
       .catch((err) => {
         console.log(err);
+        this.authService.alertPopupMessage(err.message);
+        this.loader.dismiss();
       });
     this.loader.dismiss();
   }
@@ -89,6 +98,7 @@ export class LoginPage implements OnInit {
       },
       (err) => {
         console.log(err.message);
+        this.authService.alertPopupMessage(err.message);
       }
     );
   }

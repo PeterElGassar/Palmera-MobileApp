@@ -8,6 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { LoginPageRoutingModule } from './login-routing.module';
 
 import { LoginPage } from './login.page';
+import { SharedMainModule } from 'src/app/components/shared-main.module';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { LoginPage } from './login.page';
     IonicModule,
     LoginPageRoutingModule,
     ReactiveFormsModule,
+    SharedMainModule,
   ],
   declarations: [LoginPage, ErrorMessageComponent],
 })
