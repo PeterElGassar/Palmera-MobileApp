@@ -12,14 +12,24 @@
 							<div class="row">
 								<div class="col-12">
 									<div class="form-group">
+										<ion-item>
 										<!-- <input formControlName="email" type="email" class="form-control"> -->
+										
+										<app-error-message [fild]="this.emailField" [message]="'text message'">
+
+										</app-error-message>
+										
 										<app-form-input 
 										formControlName="email"
-									    [type]="'email'" [label]="'Email'"
+									    [type]="formInput.email" [label]="'Email'"
 										[paremnForm]="loginForm"
-										[fildName]="'email'"
+										[fildName]="formInput.email"
 										
 										></app-form-input>
+
+										
+
+									</ion-item>
 										<!-- Email Validation -->
 
 										<!-- <app-error-message [fild]="loginForm.get('email')" error="required" message="Email is required"></app-error-message> -->
@@ -56,10 +66,7 @@ Email is required
 										 [paremnForm]="loginForm"
 										[fildName]="'password'"
 										 ></app-form-input>
-
-
-
-										 
+ 
 										
 <!-- 
 										<div *ngIf="loginFormControl.password?.touched &&loginFormControl.password?.invalid "

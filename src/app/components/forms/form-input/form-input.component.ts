@@ -1,6 +1,7 @@
 import {
   Component,
   ElementRef,
+  forwardRef,
   Input,
   OnInit,
   Self,
@@ -11,12 +12,21 @@ import {
   NgControl,
   FormGroup,
   FormControl,
+  NG_VALIDATORS,
+  NG_VALUE_ACCESSOR,
 } from '@angular/forms';
 
 @Component({
   selector: 'app-form-input',
   templateUrl: './form-input.component.html',
   styleUrls: ['./form-input.component.scss'],
+  // providers: [
+  //   {
+  //     provide: NG_VALUE_ACCESSOR,
+  //     useExisting: forwardRef(() => FormInputComponent),
+  //     multi: true,
+  //   },
+  // ],
 })
 export class FormInputComponent implements OnInit, ControlValueAccessor {
   @ViewChild('inputRef', { static: true }) inputRefElement: ElementRef;
@@ -33,7 +43,6 @@ export class FormInputComponent implements OnInit, ControlValueAccessor {
   public setDisabled: boolean;
 
   constructor(@Self() public controlDir: NgControl) {
-    debugger;
     this.controlDir.valueAccessor = this;
   }
 
@@ -41,7 +50,7 @@ export class FormInputComponent implements OnInit, ControlValueAccessor {
 
   get getFormFiled(): FormControl {
     let x = this.paremnForm?.get(this.fildName) as FormControl;
-    debugger;
+
     return x;
   }
 
@@ -52,7 +61,7 @@ export class FormInputComponent implements OnInit, ControlValueAccessor {
 
   writeValue(val: string): void {
     this.value = val;
-    debugger;
+
     // this.inputRefElement.nativeElement.value = obj || '';
   }
 
@@ -61,7 +70,6 @@ export class FormInputComponent implements OnInit, ControlValueAccessor {
   }
 
   registerOnTouched(fn: any): void {
-    debugger;
     this.onTouched = fn;
   }
 }

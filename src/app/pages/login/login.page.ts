@@ -9,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginPageForm } from './login-page-form';
 import { AuthService } from 'src/app/services/auth.service';
+import { FormInputTypes } from 'src/app/core/guards/Enums/form-enum';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +19,11 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginPage implements OnInit {
   loginForm: FormGroup;
   loaderVar: any;
+  //form enum
+  public formInput = FormInputTypes;
+  formInputKeys = [];
+  //form enum
+
   constructor(
     private router: Router,
     private fm: FormBuilder,
@@ -47,8 +53,8 @@ export class LoginPage implements OnInit {
     return this.loginForm;
   }
 
-  get emailField(): FormControl {
-    return this.loginForm.get('email') as FormControl;
+  get emailField(): FormGroup {
+    return this.loginForm.get(this.formInput.email) as FormGroup;
   }
 
   async submitForm() {

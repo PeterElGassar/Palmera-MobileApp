@@ -1,5 +1,9 @@
-<div *ngIf="shouldShowComponent()" class="validation-wrapper">
+<!-- <div *ngIf="shouldShowComponent()" class="validation-wrapper">
 
   <span class="ml-2 text-danger">{{message}}</span>
 
-</div>
+</div> -->
+
+<ion-label color="danger" slot="end" position="floating" *ngIf="shouldShowComponent()">{{message}}</ion-label>
+<!-- <ion-label color="danger" slot="start" position="stacked" *ngIf="shouldShowComponent()">{{message}}</ion-label> -->
+

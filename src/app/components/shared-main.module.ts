@@ -1,3 +1,4 @@
+import { ErrorMessageComponent } from './error-message/error-message.component';
 import { RouterModule } from '@angular/router';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { NgModule } from '@angular/core';
