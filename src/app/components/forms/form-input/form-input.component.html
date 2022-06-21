@@ -1,25 +1,68 @@
+<!-- <ion-label>
+  dirty: {{getFormFiled?.dirty}}
+  <br>
+  pristine: {{getFormFiled?.pristine}}
+  <br>
+  touched: {{getFormFiled?.touched}}
+  <br>
+  Errors: {{getFormFiled.errors |json}}
 
+</ion-label> -->
 
-    <ion-label>{{label}}</ion-label>
+  <ion-item 
+   [ngClass]="(getFormFiled?.dirty && getFormFiled.errors !== null)?'danger-mood'  : ''"   
+    [ngClass]="(getFormFiled?.dirty && getFormFiled.errors === null)?'valid-mood'  : ''">
+    <ion-label  position="floating">
 
-     <ion-input  class="mb-1"
-      [type]="type"
+      <!--  INPUT ICONS -->
+      <ion-icon color="primary" *ngIf="fildName === formInput.email" class="mr-3" name="person-outline"></ion-icon>
+      <ion-icon color="primary" *ngIf="fildName === formInput.password" class="mr-3" name="lock-closed-outline"></ion-icon>
+      <ion-icon color="primary" *ngIf="fildName === formInput.tel" class="mr-3" name="phone-portrait-outline"></ion-icon>
+      <!--  INPUT ICONS -->
+
+      <span>{{label}}</span>
+
+    </ion-label>
+
+<!-- For any Non -->
+     <ion-input
+     class="mb-1"
+      [type]="fildName"
      (input)="onChange($event)"
      (blur)="onTouched()"
      id="{{label}}"
      #inputRef
      name="{{label}}"
      [id]="fildName"
-     [name]="fildName"></ion-input>
+     [name]="fildName"
+     >
+
+<!-- For any Non -->
 
 
-    <!-- <ion-label *ngIf="getFormFiled?.touched && getFormFiled?.invalid "
-    class="validation-wrapper">
+
+     
 
 
-    <span *ngIf="getFormFiled?.errors.required" class="ml-2 text-danger"> Password is required</span>
+     <!-- CHECKMARK WHEN DATA AER VALD -->
+     <ion-icon class="check-mark" color="success"
+      *ngIf="(getFormFiled?.dirty && getFormFiled.errors === null)"
+      name="checkmark-outline"></ion-icon>
+      <!-- CHECKMARK WHEN DATA AER VALD -->
 
-  </ion-label>  -->
+
+     <!--   PASSWORD WHEN DATA AER VALD -->
+     <!-- <ion-icon  class="check-mark" color="primary"
+      *ngIf="(getFormFiled?.dirty && getFormFiled.errors === null)
+       && this.fildName === formInput.password"
+      [name]="passwordToggalicon"></ion-icon> -->
+      <!--  PASSWORD WHEN DATA AER VALD -->
+
+
+
+    </ion-input>
+
+
 
 <!-- <ion-label>
   dirty: {{getFormFiled?.dirty}}
@@ -28,6 +71,8 @@
   <br>
   touched: {{getFormFiled?.touched}}
   <br>
+  <br>
+  Errors: {{getFormFiled.errors |json}}
 
 </ion-label> -->
 

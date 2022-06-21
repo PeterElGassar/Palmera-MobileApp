@@ -4,6 +4,7 @@
 
 </div> -->
 
-<ion-label color="danger" slot="end" position="floating" *ngIf="shouldShowComponent()">{{message}}</ion-label>
+<ion-label  class="mt" color="danger"  position="floating" *ngIf="shouldShowRequired()"> {{message}} is required</ion-label>
+<ion-label class="mt"  color="danger"  position="floating" *ngIf="shouldShowPattern()">{{message}} is invalid </ion-label>
 <!-- <ion-label color="danger" slot="start" position="stacked" *ngIf="shouldShowComponent()">{{message}}</ion-label> -->
 

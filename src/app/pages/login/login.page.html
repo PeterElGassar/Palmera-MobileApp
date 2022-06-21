@@ -6,30 +6,28 @@
 			<div class="row">
 				<div class="col-lg-6">
 					<div class="user-form-content log-in-50">
-						<h3>Log In to Your Account</h3>
+						<h3 class="text-center">Login to your Account</h3>
 
 						<form [formGroup]="loginForm" *ngIf="loginForm" (ngSubmit)="submitForm()" class="user-form">
 							<div class="row">
 								<div class="col-12">
 									<div class="form-group">
-										<ion-item>
+									
 										<!-- <input formControlName="email" type="email" class="form-control"> -->
 										
-										<app-error-message [fild]="this.emailField" [message]="'text message'">
-
-										</app-error-message>
-										
 										<app-form-input 
-										formControlName="email"
-									    [type]="formInput.email" [label]="'Email'"
+										formControlName="{{formInput.email}}"
+									    
+										 [label]="'Email'"
 										[paremnForm]="loginForm"
 										[fildName]="formInput.email"
 										
 										></app-form-input>
-
-										
-
-									</ion-item>
+										<!-- Email Validation -->
+										<div class="mt-2">
+											<app-error-message [fild]="this.emailField" [message]="formInput.email">
+											</app-error-message>
+										</div>
 										<!-- Email Validation -->
 
 										<!-- <app-error-message [fild]="loginForm.get('email')" error="required" message="Email is required"></app-error-message> -->
@@ -59,15 +57,22 @@ Email is required
 									<div class="form-group">
 										<!-- <label>Password</label>
 										<input class="form-control" formControlName="password" type="password"> -->
-										<app-form-input 
-										formControlName="password"
-									    [type]="'password'"
-										 [label]="'Password'"
-										 [paremnForm]="loginForm"
-										[fildName]="'password'"
-										 ></app-form-input>
+
  
-										
+										 <app-form-input 
+										 formControlName="{{formInput.password}}"										 
+										  [label]="'Password'"
+										 [paremnForm]="loginForm"
+										 [fildName]="formInput.password"
+										 
+										 ></app-form-input>
+
+										 <!-- Password Validation -->
+										 <div class="mt-2">
+											 <app-error-message [fild]="this.passwordField" [message]="formInput.password">
+											 </app-error-message>
+										 </div>
+										 <!-- Password Validation -->
 <!-- 
 										<div *ngIf="loginFormControl.password?.touched &&loginFormControl.password?.invalid "
 											class="validation-wrapper">
@@ -94,8 +99,10 @@ Email is required
 								</div>
 
 								<div class="col-12">
-									<button [disabled]="loginForm.invalid" class="default-btn" type="submit">
-										Log In
+									<button [disabled]="loginForm.invalid"
+									 [ngClass]="{'disabel-btn':loginForm.invalid}"
+									  class="default-btn" type="submit">
+										Login
 									</button>
 								</div>
 

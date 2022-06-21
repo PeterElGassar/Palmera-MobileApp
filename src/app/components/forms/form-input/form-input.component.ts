@@ -15,6 +15,7 @@ import {
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
 } from '@angular/forms';
+import { FormInputTypes } from 'src/app/core/guards/Enums/form-enum';
 
 @Component({
   selector: 'app-form-input',
@@ -29,29 +30,29 @@ import {
   // ],
 })
 export class FormInputComponent implements OnInit, ControlValueAccessor {
-  @ViewChild('inputRef', { static: true }) inputRefElement: ElementRef;
-  @Input() type: string = 'text';
   @Input() label: string = 'text';
-
   @Input() public paremnForm: FormGroup;
   @Input() public fildName: string;
+
+  formInput = FormInputTypes;
+  showPassword: boolean = false;
+  passwordToggalicon: string = 'eye-outline';
 
   public value: string;
   public changed: (value: string) => void;
   onTouched = () => {};
 
-  public setDisabled: boolean;
-
   constructor(@Self() public controlDir: NgControl) {
     this.controlDir.valueAccessor = this;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('Name: ' + this.fildName);
+    console.log('Enum Name: ' + this.formInput[this.fildName]);
+  }
 
   get getFormFiled(): FormControl {
-    let x = this.paremnForm?.get(this.fildName) as FormControl;
-
-    return x;
+    return this.paremnForm?.get(this.fildName) as FormControl;
   }
 
   onChange(event: Event) {

@@ -21,7 +21,6 @@ export class LoginPage implements OnInit {
   loaderVar: any;
   //form enum
   public formInput = FormInputTypes;
-  formInputKeys = [];
   //form enum
 
   constructor(
@@ -45,7 +44,15 @@ export class LoginPage implements OnInit {
           Validators.pattern('^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$'),
         ],
       ],
-      password: [null, [Validators.required]],
+      password: [
+        null,
+        [
+          Validators.required,
+          Validators.pattern(
+            "(?=^.{6,10}$)(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;'?//&gt;.&lt;,])(?!.*\\s).*$"
+          ),
+        ],
+      ],
     });
   }
 
@@ -55,6 +62,10 @@ export class LoginPage implements OnInit {
 
   get emailField(): FormGroup {
     return this.loginForm.get(this.formInput.email) as FormGroup;
+  }
+
+  get passwordField(): FormGroup {
+    return this.loginForm.get(this.formInput.password) as FormGroup;
   }
 
   async submitForm() {

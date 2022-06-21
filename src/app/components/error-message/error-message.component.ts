@@ -22,8 +22,15 @@ export class ErrorMessageComponent implements OnInit {
 
   ngOnInit() {}
 
-  shouldShowComponent() {
+  shouldShowRequired() {
+    debugger;
     if (this.fild.dirty && this.fild.hasError('required')) return true;
+    return false;
+  }
+
+  shouldShowPattern() {
+    if (this.fild.dirty && this.fild.errors && this.fild.errors.pattern)
+      return true;
 
     return false;
   }
