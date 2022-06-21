@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { create } from 'domain';
 import { LoadingController } from '@ionic/angular';
 import { Role } from 'src/app/shared/models/role';
+import { FormInputTypes } from 'src/app/core/guards/Enums/form-enum';
 
 @Component({
   selector: 'app-register',
@@ -17,6 +18,11 @@ import { Role } from 'src/app/shared/models/role';
 export class RegisterPage implements OnInit {
   registerForm: FormGroup;
   loaderVar: any;
+
+  //form enum
+  public formInput = FormInputTypes;
+  //form enum
+
   roles: any[];
   _users: User[];
 
@@ -52,7 +58,15 @@ export class RegisterPage implements OnInit {
           Validators.pattern('^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$'),
         ],
       ],
-      password: [null, [Validators.required]],
+      password: [
+        null,
+        [
+          Validators.required,
+          Validators.pattern(
+            "(?=^.{6,10}$)(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;'?//&gt;.&lt;,])(?!.*\\s).*$"
+          ),
+        ],
+      ],
       name: [null, [Validators.required, Validators.maxLength(100)]],
       phone: [null, [Validators.required, Validators.maxLength(15)]],
       organizationCode: [null, [Validators.required, Validators.maxLength(15)]],
@@ -64,6 +78,30 @@ export class RegisterPage implements OnInit {
 
   get registerFormControl() {
     return this.registerForm.controls;
+  }
+
+  get emailField(): FormGroup {
+    return this.registerForm.get(this.formInput.email) as FormGroup;
+  }
+
+  get passwordField(): FormGroup {
+    return this.registerForm.get(this.formInput.password) as FormGroup;
+  }
+
+  get nameField(): FormGroup {
+    return this.registerForm.get('name') as FormGroup;
+  }
+
+  get phoneField(): FormGroup {
+    return this.registerForm.get('phone') as FormGroup;
+  }
+
+  get organizationCodeField(): FormGroup {
+    return this.registerForm.get('organizationCode') as FormGroup;
+  }
+
+  get employeeNumberField(): FormGroup {
+    return this.registerForm.get('employeeNumber') as FormGroup;
   }
 
   async submitForm() {

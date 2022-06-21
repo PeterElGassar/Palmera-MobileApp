@@ -19,6 +19,6 @@ import { SharedMainModule } from 'src/app/components/shared-main.module';
     ReactiveFormsModule,
     SharedMainModule,
   ],
-  declarations: [LoginPage, ErrorMessageComponent],
+  declarations: [LoginPage],
 })
 export class LoginPageModule {}

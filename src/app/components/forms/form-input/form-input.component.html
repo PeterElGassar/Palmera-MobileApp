@@ -15,9 +15,11 @@
     <ion-label  position="floating">
 
       <!--  INPUT ICONS -->
-      <ion-icon color="primary" *ngIf="fildName === formInput.email" class="mr-3" name="person-outline"></ion-icon>
+      <ion-icon color="primary" *ngIf="fildName === 'name'" class="mr-3" name="person-outline"></ion-icon>
+      <ion-icon color="primary" *ngIf="fildName === formInput.email" class="mr-3" name="mail-outline"></ion-icon>
+
       <ion-icon color="primary" *ngIf="fildName === formInput.password" class="mr-3" name="lock-closed-outline"></ion-icon>
-      <ion-icon color="primary" *ngIf="fildName === formInput.tel" class="mr-3" name="phone-portrait-outline"></ion-icon>
+      <ion-icon color="primary" *ngIf="fildName === 'phone'" class="mr-3" name="phone-portrait-outline"></ion-icon>
       <!--  INPUT ICONS -->
 
       <span>{{label}}</span>

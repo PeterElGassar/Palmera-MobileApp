@@ -1,3 +1,4 @@
+import { SharedMainModule } from 'src/app/components/shared-main.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -7,6 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { RegisterPageRoutingModule } from './register-routing.module';
 
 import { RegisterPage } from './register.page';
+import { ErrorMessageComponent } from 'src/app/components/error-message/error-message.component';
 
 @NgModule({
   imports: [
@@ -15,6 +17,7 @@ import { RegisterPage } from './register.page';
     IonicModule,
     RegisterPageRoutingModule,
     ReactiveFormsModule,
+    SharedMainModule,
   ],
   declarations: [RegisterPage],
 })

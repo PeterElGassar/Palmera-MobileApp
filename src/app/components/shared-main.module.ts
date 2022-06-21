@@ -8,7 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormInputComponent } from './forms/form-input/form-input.component';
 
 @NgModule({
-  declarations: [SidebarComponent, FormInputComponent],
+  declarations: [SidebarComponent, FormInputComponent, ErrorMessageComponent],
   imports: [
     CommonModule,
     IonicModule,
@@ -17,6 +17,6 @@ import { FormInputComponent } from './forms/form-input/form-input.component';
     FormsModule,
     ReactiveFormsModule,
   ],
-  exports: [SidebarComponent, FormInputComponent],
+  exports: [SidebarComponent, FormInputComponent, ErrorMessageComponent],
 })
 export class SharedMainModule {}
