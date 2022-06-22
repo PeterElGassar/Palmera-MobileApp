@@ -12,7 +12,11 @@ import { User } from '../shared/models/user';
 import * as firebase from 'firebase/compat/app';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AlertController } from '@ionic/angular';
-import { GoogleAuthProvider, FacebookAuthProvider } from '@angular/fire/auth';
+import {
+  GoogleAuthProvider,
+  FacebookAuthProvider,
+  ApplicationVerifier,
+} from '@angular/fire/auth';
 import { resolve } from 'dns';
 import { rejects } from 'assert';
 import { promise } from 'protractor';
@@ -86,7 +90,6 @@ export class AuthService {
       }
     );
   }
-
   login(val: any): Observable<User> {
     debugger;
     return new Observable<any>((observable) => {
@@ -193,5 +196,15 @@ export class AuthService {
           resolve(userData);
         });
     });
+  }
+
+  signInWithPhoneNumber(
+    mobileNumber: string,
+    reCaptureVerifier: ApplicationVerifier
+  ) {
+    //fetch promise
+    return firebase.default
+      .auth()
+      .signInWithPhoneNumber(mobileNumber, reCaptureVerifier);
   }
 }

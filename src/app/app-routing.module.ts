@@ -45,11 +45,21 @@ const routes: Routes = [
     canActivate: [AuthGuard],
 
     // ...canActivate(redirectUnauthorizedToLogin),
-  },  {
-    path: 'complete-data',
-    loadChildren: () => import('./pages/complete-data/complete-data.module').then( m => m.CompleteDataPageModule)
   },
-
+  {
+    path: 'complete-data',
+    loadChildren: () =>
+      import('./pages/complete-data/complete-data.module').then(
+        (m) => m.CompleteDataPageModule
+      ),
+  },
+  {
+    path: 'otp',
+    loadChildren: () =>
+      import('./pages/otp-verification/otp-verification.module').then(
+        (m) => m.OtpVerificationPageModule
+      ),
+  },
 ];
 
 @NgModule({

@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Verification Phone Number</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+    <div class="row mt-5">
+      <div class="col-12 col-md-8 col-lg-5 mx-auto">
+  
+        <form>
+  
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Mobile Phone Number</label>
+  
+            <input type="text" min="11" max="13" class="form-control" name="mobileNumber" [(ngModel)]="mobileNumber"
+              id="exampleInputEmail1" aria-describedby="phone">
+  
+            <div id="phone" class="form-text">We'll never share your Phone No. with anyone else.</div>
+          </div>
+  
+  
+          <div class="mb-3">
+            <!-- Child Comp  -->
+            <app-verify-code *ngIf="isSendedCodeSuccess"></app-verify-code>
+            <!-- Child Comp  -->
+  
+          </div>
+  
+  
+          <button type="submit" (click)="getOTP()" class="btn btn-primary" id="login-btn">Login</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</ion-content>

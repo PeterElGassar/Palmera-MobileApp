@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormInputComponent } from './forms/form-input/form-input.component';
 import { FormDropdownComponent } from './forms/form-dropdown/form-dropdown.component';
+import { VerifyCodeComponent } from './verify-code/verify-code.component';
+import { NgOtpInputModule } from 'ng-otp-input';
 
 @NgModule({
   declarations: [
@@ -14,6 +16,7 @@ import { FormDropdownComponent } from './forms/form-dropdown/form-dropdown.compo
     FormInputComponent,
     ErrorMessageComponent,
     FormDropdownComponent,
+    VerifyCodeComponent,
   ],
   imports: [
     CommonModule,
@@ -21,12 +24,14 @@ import { FormDropdownComponent } from './forms/form-dropdown/form-dropdown.compo
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
+    NgOtpInputModule,
   ],
   exports: [
     SidebarComponent,
     FormInputComponent,
     ErrorMessageComponent,
     FormDropdownComponent,
+    VerifyCodeComponent,
   ],
 })
 export class SharedMainModule {}
