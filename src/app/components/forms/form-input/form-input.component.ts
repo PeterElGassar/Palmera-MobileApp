@@ -31,7 +31,7 @@ import { FormInputTypes } from 'src/app/core/guards/Enums/form-enum';
 })
 export class FormInputComponent implements OnInit, ControlValueAccessor {
   @Input() label: string = 'text';
-  @Input() public paremnForm: FormGroup;
+  @Input() public parentForm: FormGroup;
   @Input() public fildName: string;
 
   formInput = FormInputTypes;
@@ -46,13 +46,10 @@ export class FormInputComponent implements OnInit, ControlValueAccessor {
     this.controlDir.valueAccessor = this;
   }
 
-  ngOnInit(): void {
-    console.log('Name: ' + this.fildName);
-    console.log('Enum Name: ' + this.formInput[this.fildName]);
-  }
+  ngOnInit(): void {}
 
   get getFormFiled(): FormControl {
-    return this.paremnForm?.get(this.fildName) as FormControl;
+    return this.parentForm?.get(this.fildName) as FormControl;
   }
 
   onChange(event: Event) {

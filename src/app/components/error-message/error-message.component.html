@@ -1,10 +1,6 @@
-<!-- <div *ngIf="shouldShowComponent()" class="validation-wrapper">
 
-  <span class="ml-2 text-danger">{{message}}</span>
-
-</div> -->
-
-<ion-label  class="mt" color="danger"  position="floating" *ngIf="shouldShowRequired()"> {{message}} is required</ion-label>
-<ion-label class="mt"  color="danger"  position="floating" *ngIf="shouldShowPattern()">{{message}} is invalid </ion-label>
-<!-- <ion-label color="danger" slot="start" position="stacked" *ngIf="shouldShowComponent()">{{message}}</ion-label> -->
+<!-- <h5>{{this.fild.hasError('required')}}</h5>
+<h5>{{this.fild.dirty}}</h5> -->
+<ion-label   color="danger"  position="floating" *ngIf="shouldShowRequired()"> {{message}} is required</ion-label>
+<ion-label  color="danger"  position="floating" *ngIf="shouldShowPattern()">{{message}} is invalid </ion-label>
 

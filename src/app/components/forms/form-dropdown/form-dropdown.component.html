@@ -1,0 +1,18 @@
+<!-- <ul>
+  <li *ngFor="let value of values" (click)="onSelect(value.value)">{{value.label}}</li>
+</ul> -->
+<ion-item>
+
+
+<ion-label>{{dropdownLabel}}</ion-label>
+<ion-select  (ionChange)="onSelect($event)" placeholder="Select One">
+  <ion-select-option 
+  
+    *ngFor="let value of values"
+     value="{{value.roleId}}"
+    
+     >
+    {{value.roleName}}
+  </ion-select-option>
+</ion-select>
+</ion-item>

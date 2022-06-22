@@ -8,6 +8,7 @@ import { create } from 'domain';
 import { LoadingController } from '@ionic/angular';
 import { Role } from 'src/app/shared/models/role';
 import { FormInputTypes } from 'src/app/core/guards/Enums/form-enum';
+import { RegisterFilds } from 'src/app/core/guards/Enums/register-fils';
 
 @Component({
   selector: 'app-register',
@@ -21,6 +22,7 @@ export class RegisterPage implements OnInit {
 
   //form enum
   public formInput = FormInputTypes;
+  public registerFilds = RegisterFilds;
   //form enum
 
   roles: any[];
@@ -104,6 +106,10 @@ export class RegisterPage implements OnInit {
     return this.registerForm.get('employeeNumber') as FormGroup;
   }
 
+  get roleIdField(): FormGroup {
+    return this.registerForm.get('roleId') as FormGroup;
+  }
+
   async submitForm() {
     this.loaderVar = await this.loader.create({ message: 'loading ...' });
     this.loaderVar.present();
@@ -152,5 +158,11 @@ export class RegisterPage implements OnInit {
         console.log('roles' + res);
       }
     });
+  }
+
+  onChangeDropdownValue(dropdownValue: any) {
+    debugger;
+    this.registerForm.get(this.registerFilds.roleId).setValue(dropdownValue);
+    console.log('on change: ' + dropdownValue);
   }
 }
