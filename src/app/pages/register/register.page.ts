@@ -9,6 +9,7 @@ import { LoadingController } from '@ionic/angular';
 import { Role } from 'src/app/shared/models/role';
 import { FormInputTypes } from 'src/app/core/guards/Enums/form-enum';
 import { RegisterFilds } from 'src/app/core/guards/Enums/register-fils';
+import { AuthHandleErrorService } from 'src/app/services/auth-handle-error.service';
 
 @Component({
   selector: 'app-register',
@@ -33,7 +34,7 @@ export class RegisterPage implements OnInit {
     private fm: FormBuilder,
     private authService: AuthService,
     private loader: LoadingController,
-    private af: AngularFireAuth
+    private authHandleErrorService: AuthHandleErrorService,
   ) {
     var users: User[];
     this.authService.getAllUsers().then((value) => {
@@ -132,9 +133,8 @@ export class RegisterPage implements OnInit {
         }
       },
       (err) => {
-        this.authService.alertPopupMessage(err.message);
-        // alert(err.message);
-        console.log(err);
+        this.authService
+        .alertPopupMessage(this.authHandleErrorService.showErrorMessage(err.code));
       }
     );
     this.loaderVar.dismiss();

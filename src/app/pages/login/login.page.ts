@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { LoginPageForm } from './login-page-form';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormInputTypes } from 'src/app/core/guards/Enums/form-enum';
+import { AuthHandleErrorService } from 'src/app/services/auth-handle-error.service';
 
 @Component({
   selector: 'app-login',
@@ -27,6 +28,7 @@ export class LoginPage implements OnInit {
     private router: Router,
     private fm: FormBuilder,
     private authService: AuthService,
+    private authHandleErrorService: AuthHandleErrorService,
     private loader: LoadingController
   ) {}
 
@@ -84,8 +86,9 @@ export class LoginPage implements OnInit {
         this.loader.dismiss();
       })
       .catch((err) => {
-        console.log(err);
-        this.authService.alertPopupMessage(err.message);
+        debugger      
+        this.authService
+        .alertPopupMessage(this.authHandleErrorService.showErrorMessage(err.code));
         this.loader.dismiss();
       });
     this.loader.dismiss();

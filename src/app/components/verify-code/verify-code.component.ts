@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+// import { environment } from '../environments/environment';
+
 import * as firebase from 'firebase/compat/app';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-verify-code',
@@ -10,18 +13,8 @@ import * as firebase from 'firebase/compat/app';
 export class VerifyCodeComponent implements OnInit {
   verifyCode: string;
   otp!: string;
+  config = environment.inputCodeConfig;
 
-  config = {
-    allowNumbersOnly: true,
-    length: 6,
-    isPasswordInput: false,
-    disableAutoFocus: false,
-    placeholder: '',
-    inputStyles: {
-      width: '50px',
-      height: '50px',
-    },
-  };
 
   constructor(private router: Router) {}
 
@@ -38,22 +31,25 @@ export class VerifyCodeComponent implements OnInit {
     //create Credentials
     // console.log(this.verifyCode);
     console.log(this.otp);
-
+debugger
     var credential = firebase.default.auth.PhoneAuthProvider.credential(
       this.verifyCode,
       this.otp
     );
     console.log(credential);
-
+    debugger
     firebase.default
       .auth()
       .signInWithCredential(credential)
       .then((response) => {
+        debugger
         console.log(response);
+        //save user isPhonrNumberVerify
         localStorage.setItem('user_data', JSON.stringify(response));
-        this.router.navigateByUrl('/dashboard');
+        this.router.navigateByUrl('/home');
       })
       .catch((error) => {
+        debugger
         console.log(error);
         alert(error.message);
       });

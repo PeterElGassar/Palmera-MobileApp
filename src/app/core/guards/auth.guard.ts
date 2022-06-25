@@ -26,14 +26,22 @@ export class AuthGuard implements CanActivate {
           //Check If User Complete his data Before Redirect To Home Page
 
           this.authServe.getUserDetails(user).then((userData: any) => {
+            debugger;
+
             if (userData.isDataComplete) {
+              debugger;
               this.router.navigate(['/home'], {
                 queryParams: { returnUrl: state.url },
               });
-            } else
+            } 
+            else{
+            debugger;
+
               this.router.navigate(['/complete-data'], {
                 queryParams: { returnUrl: state.url },
               });
+            
+            }
           });
           return true;
         }

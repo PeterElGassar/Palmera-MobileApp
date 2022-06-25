@@ -23,7 +23,7 @@ export class ErrorMessageComponent implements OnInit {
   ngOnInit() {}
 
   shouldShowRequired() {
-    debugger;
+    
     if (this.fild.dirty && this.fild.hasError('required')) return true;
     return false;
   }

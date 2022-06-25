@@ -16,7 +16,11 @@ export class OtpVerificationPage implements OnInit {
 
   constructor(private auth: AngularFireAuth, private authServer: AuthService) {
     this.auth.authState.subscribe((user) => {
-      if (user) this.hasVerifiedEmail = user.emailVerified;
+      if (user){ 
+        this.hasVerifiedEmail = user.emailVerified
+      this.mobileNumber=user.phoneNumber;
+      };
+      
       console.log(user.emailVerified);
     });
   }

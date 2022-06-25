@@ -1,3 +1,4 @@
+import { User } from './../../shared/models/user';
 import { LoadingController } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Component, OnInit } from '@angular/core';
@@ -15,7 +16,7 @@ export class CompleteDataPage implements OnInit {
   completeDataForm: FormGroup;
   loaderVar: any;
   roles: any[];
-
+  user: any;
   constructor(
     private router: Router,
     private fm: FormBuilder,
@@ -23,23 +24,26 @@ export class CompleteDataPage implements OnInit {
     private loader: LoadingController,
     private af: AngularFireAuth
   ) {
-    this.authService.user.subscribe((user) => {
+    this.authService.user.subscribe((user: any) => {
       if (user) {
-        console.log(user);
+        this.user = user;
+        console.log("Xx: " + user);
+        debugger;
         this.initialUserDataFrom(user);
+        this.createCompleteDataForm();
       }
     });
   }
 
   ngOnInit() {
     this.getRoles();
-    this.createCompleteDataForm();
+
   }
 
   createCompleteDataForm() {
     this.completeDataForm = this.fm.group({
-      uid: [null],
-      name: [null, [Validators.required, Validators.maxLength(100)]],
+      uid: [this.user.uid],
+      name: [this.user.displayName, [Validators.required, Validators.maxLength(100)]],
       phone: [null, [Validators.required, Validators.maxLength(15)]],
       organizationCode: [null, [Validators.required, Validators.maxLength(15)]],
       employeeNumber: [null, [Validators.required, Validators.maxLength(10)]],
@@ -92,12 +96,12 @@ export class CompleteDataPage implements OnInit {
   }
 
   initialUserDataFrom(user: any) {
-    this.authService.getDetails(user).subscribe((userData: any) => {
+    this.authService.getUserDetails(user).then((userData: any) => {
       debugger;
       console.log('userData: ' + userData);
 
-      this.completeDataForm.get('name').setValue(userData?.name);
-      this.completeDataForm.get('uid').setValue(userData?.uid);
+      // this.completeDataForm.get('name').setValue(userData?.name);
+      // this.completeDataForm.get('uid').setValue(userData?.uid);
     });
   }
 }

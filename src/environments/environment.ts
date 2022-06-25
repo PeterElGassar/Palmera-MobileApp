@@ -21,7 +21,17 @@ export const environment = {
     messagingSenderId: '105721021504',
     appId: '1:105721021504:web:31182c6a6a64dc2f2fcba5',
   },
-
+  inputCodeConfig :{
+    allowNumbersOnly: true,
+    length: 6,
+    isPasswordInput: false,
+    disableAutoFocus: false,
+    placeholder: '',
+    inputStyles: {
+      width: '50px',
+      height: '50px',
+    },
+  },
   production: false,
 };
 
