@@ -10,52 +10,41 @@
               <div class="row">
                 <div class="col-12">
                   <div class="form-group">
-                   
 
-                  <app-form-input
-                    formControlName="{{registerFilds.name}}"
-                    [label]="'Name'"
-                    [parentForm]="registerForm"
-                    [fildName]="registerFilds.name"></app-form-input>
-                <!-- Email Validation -->
-                <div class="mt-2">
-                  <app-error-message [fild]="nameField" [message]="registerFilds.name">
-                  </app-error-message>
-                </div>
-                <!-- Email Validation -->
+
+                    <app-form-input formControlName="{{registerFilds.name}}" [label]="'Name'"
+                      [parentForm]="registerForm" [fildName]="registerFilds.name"></app-form-input>
+                    <!-- Email Validation -->
+                    <div class="mt-2">
+                      <app-error-message [fild]="nameField" [message]="registerFilds.name">
+                      </app-error-message>
+                    </div>
+                    <!-- Email Validation -->
 
                   </div>
                 </div>
 
                 <div class="col-12">
                   <div class="form-group">
-                  
-                    <app-form-input formControlName="{{registerFilds.email}}" [label]="'Email'" [parentForm]="registerForm"
-                      [fildName]="registerFilds.email"></app-form-input>
+
+                    <app-form-input formControlName="{{registerFilds.email}}" [label]="'Email'"
+                      [parentForm]="registerForm" [fildName]="registerFilds.email"></app-form-input>
                     <!-- Email Validation -->
                     <div class="mt-2">
                       <app-error-message [fild]="this.emailField" [message]="registerFilds.email">
                       </app-error-message>
                     </div>
                     <!-- Email Validation -->
-                  
-                  
-                  
-                  
-                  
+
+
                   </div>
                 </div>
 
                 <div class="col-12">
                   <div class="form-group">
 
-                    <app-form-input 
-                    formControlName="{{registerFilds.password}}"										 
-                     [label]="'Password'"
-                    [parentForm]="registerForm"
-                    [fildName]="registerFilds.password"
-                    
-                    ></app-form-input>
+                    <app-form-input formControlName="{{registerFilds.password}}" [label]="'Password'"
+                      [parentForm]="registerForm" [fildName]="registerFilds.password"></app-form-input>
 
                     <!-- Password Validation -->
                     <div class="mt-2">
@@ -71,13 +60,8 @@
 
                 <div class="col-12">
                   <div class="form-group">
-                      <app-form-input 
-                    formControlName="{{registerFilds.phone}}"										 
-                     [label]="'Phone'"
-                    [parentForm]="registerForm"
-                    [fildName]="registerFilds.phone"
-                    
-                    ></app-form-input>
+                    <app-form-input formControlName="{{registerFilds.phone}}" [label]="'Phone'"
+                      [parentForm]="registerForm" [fildName]="registerFilds.phone"></app-form-input>
 
                     <!-- Password Validation -->
                     <div class="mt-2">
@@ -91,41 +75,31 @@
 
                 <div class="col-12">
                   <div class="form-group">
-                    <app-form-input 
-                  formControlName="{{registerFilds.organizationCode}}"										 
-                  [label]="'Organization Code'"
-                  [parentForm]="registerForm"
-                  [fildName]="registerFilds.organizationCode"
-                  
-                  ></app-form-input>
+                    <app-form-input formControlName="{{registerFilds.organizationCode}}" [label]="'Organization Code'"
+                      [parentForm]="registerForm" [fildName]="registerFilds.organizationCode"></app-form-input>
 
-                  <!-- Password Validation -->
-                  <div class="mt-2">
-                    <app-error-message [fild]="this.organizationCodeField" [message]="'Organization Code'">
-                    </app-error-message>
+                    <!-- Password Validation -->
+                    <div class="mt-2">
+                      <app-error-message [fild]="this.organizationCodeField" [message]="'Organization Code'">
+                      </app-error-message>
+                    </div>
+                    <!-- Password Validation -->
                   </div>
-                  <!-- Password Validation -->
-                </div>
                 </div>
 
 
                 <div class="col-12">
                   <div class="form-group">
-                    <app-form-input 
-                  formControlName="{{registerFilds.employeeNumber}}"										 
-                   [label]="'Employee Number'"
-                  [parentForm]="registerForm"
-                  [fildName]="registerFilds.employeeNumber"
-                  
-                  ></app-form-input>
+                    <app-form-input formControlName="{{registerFilds.employeeNumber}}" [label]="'Employee Number'"
+                      [parentForm]="registerForm" [fildName]="registerFilds.employeeNumber"></app-form-input>
 
-                  <!-- Password Validation -->
-                  <div class="mt-2">
-                    <app-error-message [fild]="this.employeeNumberField" [message]="'Employee Number'">
-                    </app-error-message>
+                    <!-- Password Validation -->
+                    <div class="mt-2">
+                      <app-error-message [fild]="this.employeeNumberField" [message]="'Employee Number'">
+                      </app-error-message>
+                    </div>
+                    <!-- Password Validation -->
                   </div>
-                  <!-- Password Validation -->
-                </div>
                 </div>
 
 
@@ -133,24 +107,16 @@
                 <div class="col-12">
                   <div class="form-group">
 
-                      
-                      <!-- <ion-label>Account Type</ion-label>
-                      <ion-select formControlName="{{registerFilds.roleId}}" placeholder="Select One">
-                        <ion-select-option *ngFor="let role of roles" value="{{role.roleId}}">
-                          {{role.roleName}}
-                        </ion-select-option>
-                      </ion-select> -->
+                <!-- <h5 *ngFor="let role of roles">{{role.roleName}}</h5> -->
+                    <!-- <ion-select formControlName="{{registerFilds.roleId}}" placeholder="Select One">
+                      <ion-select-option *ngFor="let role of roles" value="{{role.roleId}}">
+                        {{role.roleName}}
+                      </ion-select-option>
+                    </ion-select> -->
 
-                      <app-form-dropdown
-                      [dropdownLabel]="'Account Type'"
-                      [values]="this.roles"
-
+                    <app-form-dropdown [dropdownLabel]="'Account Type'" [values]="this.roles"
                       (valueChange)="onChangeDropdownValue($event)">
- 
-                      </app-form-dropdown>
- 
-           
-
+                    </app-form-dropdown>
 
                     <app-error-message [fild]="this.roleIdField" [message]="'Account Type'">
                     </app-error-message>
@@ -178,11 +144,8 @@
                 </div> -->
 
                 <div class="col-12">
-                  <button 
-                  [ngClass]="{'disabel-btn':registerForm.invalid}"
-                  [disabled]="registerForm.invalid" 
-                   class="default-btn register"
-                    type="submit">
+                  <button [ngClass]="{'disabel-btn':registerForm.invalid}" [disabled]="registerForm.invalid"
+                    class="default-btn register" type="submit">
                     Register Now
                   </button>
                 </div>
@@ -190,7 +153,7 @@
                 <div class="col-12">
                   <p class="create">Already Have an Account? <a routerLink="/">Log In</a></p>
                 </div>
-               
+
               </div>
             </form>
           </div>

@@ -34,11 +34,10 @@ export class RegisterPage implements OnInit {
     private fm: FormBuilder,
     private authService: AuthService,
     private loader: LoadingController,
-    private authHandleErrorService: AuthHandleErrorService,
+    private authHandleErrorService: AuthHandleErrorService
   ) {
     var users: User[];
     this.authService.getAllUsers().then((value) => {
-      debugger;
       users = value as User[];
     });
     this._users = users;
@@ -124,7 +123,6 @@ export class RegisterPage implements OnInit {
           //email verify
           this.authService.sendEmailVerification(res.user);
           //email verify
-          debugger;
           this.registerFormControl.uid.setValue(res.user.uid);
           //save user data in firebase realtime database
           this.authService.insertUser(this.registerForm.value).then(() => {
@@ -133,8 +131,9 @@ export class RegisterPage implements OnInit {
         }
       },
       (err) => {
-        this.authService
-        .alertPopupMessage(this.authHandleErrorService.showErrorMessage(err.code));
+        this.authService.alertPopupMessage(
+          this.authHandleErrorService.showErrorMessage(err.code)
+        );
       }
     );
     this.loaderVar.dismiss();
@@ -161,7 +160,6 @@ export class RegisterPage implements OnInit {
   }
 
   onChangeDropdownValue(dropdownValue: any) {
-    debugger;
     this.registerForm.get(this.registerFilds.roleId).setValue(dropdownValue);
     console.log('on change: ' + dropdownValue);
   }

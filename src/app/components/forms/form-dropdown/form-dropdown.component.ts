@@ -14,7 +14,7 @@ import { DropdownValue } from 'src/app/core/guards/Utilities/Dropdown';
   styleUrls: ['./form-dropdown.component.scss'],
 })
 export class FormDropdownComponent implements OnInit {
-  @Input() values: any[];
+  @Input() values: DropdownValue[] = [];
 
   @Input() value: string[];
 

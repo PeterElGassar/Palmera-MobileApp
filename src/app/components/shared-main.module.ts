@@ -1,3 +1,4 @@
+import { OverPageModalComponent } from './over-page-modal/over-page-modal.component';
 import { ErrorMessageComponent } from './error-message/error-message.component';
 import { RouterModule } from '@angular/router';
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -17,6 +18,7 @@ import { NgOtpInputModule } from 'ng-otp-input';
     ErrorMessageComponent,
     FormDropdownComponent,
     VerifyCodeComponent,
+    OverPageModalComponent,
   ],
   imports: [
     CommonModule,

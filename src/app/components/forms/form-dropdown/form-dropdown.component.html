@@ -5,8 +5,8 @@
 
   <ion-label>{{dropdownLabel}}</ion-label>
   <ion-select (ionChange)="onSelect($event)" placeholder="Select One">
-    <ion-select-option *ngFor="let value of values" value="{{value.roleId}}">
-      {{value.roleName}}
+    <ion-select-option *ngFor="let value of values" value="{{value.value}}">
+      {{value.label}}
     </ion-select-option>
   </ion-select>
   

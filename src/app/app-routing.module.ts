@@ -59,7 +59,11 @@ const routes: Routes = [
       import('./pages/otp-verification/otp-verification.module').then(
         (m) => m.OtpVerificationPageModule
       ),
+  },  {
+    path: 'employee',
+    loadChildren: () => import('./pages/employee/employee.module').then( m => m.EmployeePageModule)
   },
+
 ];
 
 @NgModule({
