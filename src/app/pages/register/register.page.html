@@ -1,6 +1,5 @@
-
 <ion-content>
-	<section class="user-area ptb-100">
+  <section class="user-area ptb-100">
     <div class="container">
       <div class="row">
         <div class="col-lg-6">
@@ -11,41 +10,150 @@
               <div class="row">
                 <div class="col-12">
                   <div class="form-group">
-                    <label>Name</label>
-                    <input class="form-control" type="text" formControlName="name">
+
+
+                    <app-form-input formControlName="{{registerFilds.name}}" [label]="'Name'"
+                      [parentForm]="registerForm" [fildName]="registerFilds.name"></app-form-input>
+                    <!-- Email Validation -->
+                    <div class="mt-2">
+                      <app-error-message [fild]="nameField" [message]="registerFilds.name">
+                      </app-error-message>
+                    </div>
+                    <!-- Email Validation -->
+
                   </div>
                 </div>
 
                 <div class="col-12">
                   <div class="form-group">
-                    <label>Email</label>
-                    <input class="form-control" type="email" formControlName="email">
+
+                    <app-form-input formControlName="{{registerFilds.email}}" [label]="'Email'"
+                      [parentForm]="registerForm" [fildName]="registerFilds.email"></app-form-input>
+                    <!-- Email Validation -->
+                    <div class="mt-2">
+                      <app-error-message [fild]="this.emailField" [message]="registerFilds.email">
+                      </app-error-message>
+                    </div>
+                    <!-- Email Validation -->
+
+
                   </div>
                 </div>
 
                 <div class="col-12">
                   <div class="form-group">
-                    <label>Password</label>
-                    <input class="form-control" type="password" formControlName="password">
+
+                    <app-form-input formControlName="{{registerFilds.password}}" [label]="'Password'"
+                      [parentForm]="registerForm" [fildName]="registerFilds.password"></app-form-input>
+
+                    <!-- Password Validation -->
+                    <div class="mt-2">
+                      <app-error-message [fild]="this.passwordField" [message]="registerFilds.password">
+                      </app-error-message>
+                    </div>
+                    <!-- Password Validation -->
+
+
                   </div>
                 </div>
-  
+
+
+                <div class="col-12">
+                  <div class="form-group">
+                    <app-form-input formControlName="{{registerFilds.phone}}" [label]="'Phone'"
+                      [parentForm]="registerForm" [fildName]="registerFilds.phone"></app-form-input>
+
+                    <!-- Password Validation -->
+                    <div class="mt-2">
+                      <app-error-message [fild]="this.phoneField" [message]="registerFilds.phone">
+                      </app-error-message>
+                    </div>
+                    <!-- Password Validation -->
+                  </div>
+                </div>
+
+
+                <div class="col-12">
+                  <div class="form-group">
+                    <app-form-input formControlName="{{registerFilds.organizationCode}}" [label]="'Organization Code'"
+                      [parentForm]="registerForm" [fildName]="registerFilds.organizationCode"></app-form-input>
+
+                    <!-- Password Validation -->
+                    <div class="mt-2">
+                      <app-error-message [fild]="this.organizationCodeField" [message]="'Organization Code'">
+                      </app-error-message>
+                    </div>
+                    <!-- Password Validation -->
+                  </div>
+                </div>
+
+
+                <div class="col-12">
+                  <div class="form-group">
+                    <app-form-input formControlName="{{registerFilds.employeeNumber}}" [label]="'Employee Number'"
+                      [parentForm]="registerForm" [fildName]="registerFilds.employeeNumber"></app-form-input>
+
+                    <!-- Password Validation -->
+                    <div class="mt-2">
+                      <app-error-message [fild]="this.employeeNumberField" [message]="'Employee Number'">
+                      </app-error-message>
+                    </div>
+                    <!-- Password Validation -->
+                  </div>
+                </div>
+
+
+
+                <div class="col-12">
+                  <div class="form-group">
+
+                <!-- <h5 *ngFor="let role of roles">{{role.roleName}}</h5> -->
+                    <!-- <ion-select formControlName="{{registerFilds.roleId}}" placeholder="Select One">
+                      <ion-select-option *ngFor="let role of roles" value="{{role.roleId}}">
+                        {{role.roleName}}
+                      </ion-select-option>
+                    </ion-select> -->
+
+                    <app-form-dropdown [dropdownLabel]="'Account Type'" [values]="this.roles"
+                      (valueChange)="onChangeDropdownValue($event)">
+                    </app-form-dropdown>
+
+                    <app-error-message [fild]="this.roleIdField" [message]="'Account Type'">
+                    </app-error-message>
+
+                    <!-- <div *ngIf="registerFormControl.roleId?.touched && registerFormControl.roleId?.invalid"
+                      class="validation-wrapper">
+
+                      <span *ngIf="registerForm.get('roleId').errors['required']" class="ml-2 text-danger">
+                       Account Type is required</span>
+                        
+                    </div> -->
+
+
+
+                    <!-- Email Validation -->
+                  </div>
+                </div>
+
+
                 <!-- <div class="col-12">
                   <div class="form-group">
                     <label>Repeat Password</label>
                     <input class="form-control" type="password" name="repeat-password">
                   </div>
                 </div> -->
-  
+
                 <div class="col-12">
-                  <button [disabled]="registerForm.invalid" class="default-btn register" type="submit">
+                  <button [ngClass]="{'disabel-btn':registerForm.invalid}" [disabled]="registerForm.invalid"
+                    class="default-btn register" type="submit">
                     Register Now
                   </button>
                 </div>
 
                 <div class="col-12">
-                  <p class="create">Already Have an Account? <a routerLink="/login">Log In</a></p>
+                  <p class="create">Already Have an Account? <a routerLink="/">Log In</a></p>
                 </div>
+
               </div>
             </form>
           </div>

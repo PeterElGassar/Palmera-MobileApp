@@ -1,0 +1,22 @@
+<ion-content fullscreen>
+  <ion-list>
+    <section>
+      <ion-searchbar showCancelButton="never" placeholder="Search Employee" animated>
+      </ion-searchbar>
+    </section>
+
+    <div *ngFor="let emp of employees">
+      <app-employee-item [employee]="emp"></app-employee-item>
+    </div>
+
+  </ion-list>
+  <section>
+  </section>
+</ion-content>
+<ion-footer class="ion-padding-start ion-padding-end">
+    <ion-button expand="block" routerLink="../add-employee">
+      New Employee
+      <ion-icon name="person-add-outline" class="ion-padding"></ion-icon>
+
+    </ion-button>
+</ion-footer>

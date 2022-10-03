@@ -1,12 +1,22 @@
+import { AuthGuard } from './core/guards/auth.guard';
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
+import {
+  canActivate,
+  redirectLoggedInTo,
+  redirectUnauthorizedTo,
+} from '@angular/fire/auth-guard';
+
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['']);
+const redirectLoggedInToHome = () => redirectLoggedInTo(['/home']);
+
 const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'splashscreen',
-    pathMatch: 'full',
-  },
+  // {
+  //   path: '',
+  //   redirectTo: 'splashscreen',
+  //   pathMatch: 'full',
+  // },
 
   {
     path: 'splashscreen',
@@ -16,17 +26,44 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'login',
-    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+    path: '',
+    loadChildren: () =>
+      import('./pages/login/login.module').then((m) => m.LoginPageModule),
+    // ...canActivate(redirectLoggedInToHome),
   },
   {
     path: 'register',
-    loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
+    loadChildren: () =>
+      import('./pages/register/register.module').then(
+        (m) => m.RegisterPageModule
+      ),
   },
   {
     path: 'home',
-    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
+    loadChildren: () =>
+      import('./pages/home/home.module').then((m) => m.HomePageModule),
+    canActivate: [AuthGuard],
+
+    // ...canActivate(redirectUnauthorizedToLogin),
   },
+  {
+    path: 'complete-data',
+    loadChildren: () =>
+      import('./pages/complete-data/complete-data.module').then(
+        (m) => m.CompleteDataPageModule
+      ),
+  },
+  {
+    path: 'otp',
+    loadChildren: () =>
+      import('./pages/otp-verification/otp-verification.module').then(
+        (m) => m.OtpVerificationPageModule
+      ),
+  },  {
+    path: 'employee',
+    loadChildren: () => import('./pages/employee/employee.module').then( m => m.EmployeePageModule)
+  },
+
 ];
 
 @NgModule({

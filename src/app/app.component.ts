@@ -1,18 +1,43 @@
-import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
+import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   public appPages = [
     // { title: 'Inbox', url: '/folder/Inbox', icon: 'mail' },
-    // { title: 'Outbox', url: '/folder/Outbox', icon: 'paper-plane' },
-    // { title: 'Favorites', url: '/folder/Favorites', icon: 'heart' },
-    // { title: 'Archived', url: '/folder/Archived', icon: 'archive' },
-    // { title: 'Trash', url: '/folder/Trash', icon: 'trash' },
-    // { title: 'Spam', url: '/folder/Spam', icon: 'warning' },
   ];
   // public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
-  constructor() {}
+  isUserLoggedIn: boolean;
+  currentUserDetails: any;
+
+  constructor(private auth: AuthService, private router: Router) {}
+
+  ngOnInit(): void {
+    this.auth.user.subscribe((user) => {
+      if (user) this.isUserLoggedIn = true;
+      console.log(user);
+      this.getUserDetails(user);
+    });
+  }
+
+  logout() {
+    this.auth.logout().then(() => {
+      this.router.navigateByUrl('/');
+      console.log('out');
+    });
+  }
+
+  getUserDetails(val: any) {
+    this.auth.getUserDetails(val).then((userData) => {
+      if (userData) {
+        debugger;
+
+        this.currentUserDetails = userData;
+      }
+    });
+  }
 }

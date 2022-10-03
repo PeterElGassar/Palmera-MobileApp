@@ -7,9 +7,17 @@ import { AppComponent } from './app.component';
 //
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+
+//firebase Services
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+
+//firebase database Realtime
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+
+import { SharedMainModule } from './components/shared-main.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,10 +27,11 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
-
-    AngularFireModule.initializeApp(environment.firebaseConfig),
+    SharedMainModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig2),
     AngularFireAuthModule,
     AngularFireStorageModule,
+    AngularFireDatabaseModule,
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

@@ -1,0 +1,124 @@
+<ion-content>
+  <section class="user-area ptb-100">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="user-form-content">
+            <h3>Complete Your data</h3>
+
+            <form [formGroup]="completeDataForm" *ngIf="completeDataForm" class="user-form">
+              <div class="row">
+                <!-- Name -->
+                <div class="col-12">
+                  <div class="form-group">
+                    <label>Name</label>
+                    <input class="form-control" type="text" formControlName="name">
+
+                    <div *ngIf="completeDataFormControl.name?.touched &&completeDataFormControl.name?.invalid "
+                    class="validation-wrapper">
+
+
+                    <span *ngIf="completeDataForm.get('name').errors['required']" class="ml-2 text-danger"> Name
+                      is required</span>
+
+                     </div>
+                  </div>
+                </div>
+
+
+                <!-- Phone -->
+                <div class="col-12">
+                  <div class="form-group">
+                    <label>Phone</label>
+                    <input max="15" class="form-control" type="tel" formControlName="phone">
+
+                    <div *ngIf="completeDataFormControl.phone?.touched && completeDataFormControl.phone?.invalid"
+                      class="validation-wrapper">
+
+                      <span *ngIf="completeDataForm.get('phone').errors['required']" class="ml-2 text-danger">
+                        Phone No. is required</span>
+                        
+                    </div>
+                    <!-- Email Validation -->
+                  </div>
+                </div>
+
+                <!--Organization Code  -->
+                <div class="col-12">
+                  <div class="form-group">
+                    <label>Organization Code</label>
+                    <input class="form-control" type="text" formControlName="organizationCode">
+
+                    <div *ngIf="completeDataFormControl.organizationCode?.touched && completeDataFormControl.organizationCode?.invalid"
+                      class="validation-wrapper">
+
+                      <span *ngIf="completeDataForm.get('organizationCode').errors['required']" class="ml-2 text-danger">
+                        organization Code is required</span>
+                        
+                    </div>
+                    <!-- Email Validation -->
+                  </div>
+                </div>
+
+                <!-- Employee Number -->
+                <div class="col-12">
+                  <div class="form-group">
+                    <label>Employee Number</label>
+                    <input class="form-control" type="number" formControlName="employeeNumber">
+
+                    <div *ngIf="completeDataFormControl.employeeNumber?.touched && completeDataFormControl.employeeNumber?.invalid"
+                      class="validation-wrapper">
+
+                      <span *ngIf="completeDataForm.get('employeeNumber').errors['required']" class="ml-2 text-danger">
+                        Employee No. is required</span>
+                        
+                    </div>
+                    <!-- Email Validation -->
+                  </div>
+                </div>
+
+                <!--Account Type  -->
+                <div class="col-12">
+                  <div class="form-group">
+
+                    <ion-item>
+                      <ion-label>Account Type</ion-label>
+                      <ion-select formControlName="roleId" placeholder="Select One">
+                        <ion-select-option *ngFor="let role of roles" value="{{role.roleId}}">
+                          {{role.roleName}}
+                        </ion-select-option>
+                      </ion-select>
+                    </ion-item>
+
+
+
+                    <div *ngIf="completeDataFormControl.roleId?.touched && completeDataFormControl.roleId?.invalid"
+                      class="validation-wrapper">
+
+                      <span *ngIf="completeDataForm.get('roleId').errors['required']" class="ml-2 text-danger">
+                       Account Type is required</span>
+                        
+                    </div>
+                    <!-- Email Validation -->
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <button [disabled]="completeDataForm.invalid" (click)="submitForm()" class="default-btn completeData"
+                    type="submit">
+                    Register Now
+                  </button>
+                </div>
+
+                <div class="col-12">
+                  <p class="create">Already Have an Account? <a routerLink="/">Log In</a></p>
+                </div>
+               
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</ion-content>
